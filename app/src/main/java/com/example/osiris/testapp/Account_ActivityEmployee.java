@@ -23,9 +23,17 @@ public class Account_ActivityEmployee extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               mAuth.signOut();
+                mAuth.signOut();
                 finish();
+                goB();     // just creating a new intent was giving an error?
             }
         });
+
+
+    }//asdasd
+
+    public void goB() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

@@ -27,6 +27,13 @@
         android:onClick="getCompanyView"/>
 
     <Button
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/createBtn"
+        android:onClick="createNewUser"
+        android:text="Create new account"/>
+
+    <Button
         android:id="@+id/worker_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

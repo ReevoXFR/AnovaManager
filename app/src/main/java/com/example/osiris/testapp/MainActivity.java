@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }//adddasdasd
+    }
 
     public void getCompanyView(View view){
         Intent intent = new Intent(this, Company_OwnerIntent.class);
@@ -24,5 +24,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //test Git.
+    public void createNewUser(View view) {
+        Intent intent = new Intent(this, CreateUser.class);
+        startActivity(intent);
+    }
+
 }

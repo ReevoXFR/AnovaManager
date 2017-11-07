@@ -27,7 +27,8 @@
         <activity
             android:name=".Employee_Intent"
             android:label="@string/Employee_Intent" />
-        <activity android:name=".Account_ActivityEmployee"></activity>
+        <activity android:name=".Account_ActivityEmployee" />
+        <activity android:name=".CreateUser"></activity>
     </application>
 
 </manifest>
