@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
+    }//addd
 
     public void getCompanyView(View view){
         Intent intent = new Intent(this, Company_OwnerIntent.class);
