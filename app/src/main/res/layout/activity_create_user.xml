@@ -39,13 +39,26 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/password"
+        android:inputType="textPassword"
         app:layout_constraintTop_toBottomOf="@+id/txt3"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Retype the password:"
+        android:id="@+id/txt4"
+        app:layout_constraintTop_toBottomOf="@+id/password"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/password2"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@+id/txt4"/>
 
     <Button
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:id="@+id/createBtn"
-        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintTop_toBottomOf="@+id/password2"
         android:text="CREATE"
         android:onClick="createUser"/>
 
