@@ -46,8 +46,11 @@ public class Employee_Intent extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser() != null){
-
-                    startActivity(new Intent(Employee_Intent.this, Account_ActivityEmployee.class));
+                    if(mAuth.getCurrentUser().isEmailVerified()) {
+                        startActivity(new Intent(Employee_Intent.this, Account_ActivityEmployee.class));
+                    } else {
+                        Toast.makeText(Employee_Intent.this, "Email not verified", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         };
