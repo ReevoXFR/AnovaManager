@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,7 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Employee_Intent extends AppCompatActivity {
+public class Employee_Login extends AppCompatActivity {
 
     private EditText emailText;
     private EditText passwordText;
@@ -31,7 +30,7 @@ public class Employee_Intent extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_employee__intent);
+        setContentView(R.layout.activity_employee__login);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -47,9 +46,9 @@ public class Employee_Intent extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser() != null){
                     if(mAuth.getCurrentUser().isEmailVerified()) {
-                        startActivity(new Intent(Employee_Intent.this, Account_ActivityEmployee.class));
+                        startActivity(new Intent(Employee_Login.this, Employee_Account.class));
                     } else {
-                        Toast.makeText(Employee_Intent.this, "Email not verified", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Employee_Login.this, "Email not verified", Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -74,13 +73,13 @@ public class Employee_Intent extends AppCompatActivity {
         String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
-            Toast.makeText(Employee_Intent.this, "The fields are empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(Employee_Login.this, "The fields are empty", Toast.LENGTH_LONG).show();
         }else{
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(!task.isSuccessful()){
-                        Toast.makeText(Employee_Intent.this, "Sign in problem", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Employee_Login.this, "Sign in problem", Toast.LENGTH_LONG).show();
                     }else{
                         finish();
                     }

@@ -3,7 +3,7 @@ package com.example.osiris.testapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Company_OwnerIntent extends AppCompatActivity {
+public class CompanyO_Login extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

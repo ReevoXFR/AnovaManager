@@ -22,12 +22,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Company_OwnerIntent"
+            android:name=".CompanyO_Login"
             android:label="@string/Company_Owner_Intent" />
         <activity
-            android:name=".Employee_Intent"
+            android:name=".Employee_Login"
             android:label="@string/Employee_Intent" />
-        <activity android:name=".Account_ActivityEmployee" />
+        <activity android:name=".Employee_Account" />
         <activity android:name=".CreateUser"></activity>
     </application>
 
