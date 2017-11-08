@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Account_ActivityEmployee extends AppCompatActivity {
+public class Employee_Account extends AppCompatActivity {
 
     private Button button;
     private FirebaseAuth mAuth;
@@ -25,14 +25,14 @@ public class Account_ActivityEmployee extends AppCompatActivity {
             public void onClick(View v) {
                 mAuth.signOut();
                 finish();
-                goB();     // just creating a new intent was giving an error?
+                goBackToMainPage();     // just creating a new intent was giving an error?
             }
         });
 
 
     }//asdasd
 
-    public void goB() {
+    public void goBackToMainPage() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

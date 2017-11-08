@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.osiris.testapp.Company_OwnerIntent"
+    tools:context="com.example.osiris.testapp.CompanyO_Login"
     android:background="@drawable/background_gradient">
-
 </android.support.constraint.ConstraintLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.osiris.testapp.Account_ActivityEmployee"
+    tools:context="com.example.osiris.testapp.Employee_Account"
     android:background="@drawable/background_gradient">
 
 
