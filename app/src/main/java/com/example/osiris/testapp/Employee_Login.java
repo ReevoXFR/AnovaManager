@@ -2,6 +2,7 @@ package com.example.osiris.testapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -45,11 +46,7 @@ public class Employee_Login extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser() != null){
-                    if(mAuth.getCurrentUser().isEmailVerified()) {
-                        startActivity(new Intent(Employee_Login.this, Employee_Account.class));
-                    } else {
-                        Toast.makeText(Employee_Login.this, "Email not verified", Toast.LENGTH_LONG).show();
-                    }
+
                 }
             }
         };
@@ -64,12 +61,34 @@ public class Employee_Login extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences prefs = getSharedPreferences("MyPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("mail", emailText.getText().toString());
+        editor.putString("password", passwordText.getText().toString());
+        editor.apply();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences prefs = getSharedPreferences("MyPreferences", MODE_PRIVATE);
+        String mail = prefs.getString("mail", "");
+        String password = prefs.getString("password", "");
+        emailText.setText(mail);
+        passwordText.setText(password);
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
     }
 
     private void startSignIn(){
+        progressDialog.setMessage("Logging in ...");
+        progressDialog.show();
         String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
@@ -78,15 +97,19 @@ public class Employee_Login extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(mAuth.getCurrentUser().isEmailVerified() ==  false) {
+                        Toast.makeText(Employee_Login.this, "Email not verified", Toast.LENGTH_LONG).show();
+                    }
                     if(!task.isSuccessful()){
                         Toast.makeText(Employee_Login.this, "Sign in problem", Toast.LENGTH_LONG).show();
                     }else{
+                        startActivity(new Intent(Employee_Login.this, Employee_Account.class));
                         finish();
+                        progressDialog.dismiss();
                     }
                 }
             });
-            progressDialog.setMessage("Logging in...");
-            progressDialog.show();
+
 
         }
 
