@@ -26,6 +26,8 @@ public class CompanyO_Login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
+
+
     private ProgressDialog progressDialog;
 
     @Override
@@ -107,7 +109,7 @@ public class CompanyO_Login extends AppCompatActivity {
                             mAuth.signOut();
                             return;
                         }
-                        startActivity(new Intent(CompanyO_Login.this, Employer_Account.class));
+                        startActivity(new Intent(CompanyO_Login.this, CompanyO_Account.class));
                         finish();
                         progressDialog.dismiss();
                     }

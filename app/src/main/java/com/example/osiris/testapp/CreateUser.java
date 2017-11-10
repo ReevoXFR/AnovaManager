@@ -60,12 +60,11 @@ public class CreateUser extends AppCompatActivity {
                         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Employees");
 
 
-                       String id = myRef.push().getKey();
+                        String id = myRef.push().getKey();
 
 
                         myRef.child(id).setValue(employee);
                         goMain();
-
                     }
                 });
     }

@@ -29,7 +29,7 @@
             android:label="@string/Employee_Intent" />
         <activity android:name=".Employee_Account" />
         <activity android:name=".CreateUser" />
-        <activity android:name=".Employer_Account"></activity>
+        <activity android:name=".CompanyO_Account"></activity>
     </application>
 
 </manifest>
