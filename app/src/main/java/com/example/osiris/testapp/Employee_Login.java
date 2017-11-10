@@ -94,12 +94,14 @@ public class Employee_Login extends AppCompatActivity {
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
             Toast.makeText(Employee_Login.this, "The fields are empty", Toast.LENGTH_LONG).show();
         }else{
+            if(mAuth.getCurrentUser().isEmailVerified() ==  false) {
+                Toast.makeText(Employee_Login.this, "Email not verified", Toast.LENGTH_LONG).show();
+                progressDialog.hide();
+                return;
+            }
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(mAuth.getCurrentUser().isEmailVerified() ==  false) {
-                        Toast.makeText(Employee_Login.this, "Email not verified", Toast.LENGTH_LONG).show();
-                    }
                     if(!task.isSuccessful()){
                         Toast.makeText(Employee_Login.this, "Sign in problem", Toast.LENGTH_LONG).show();
                     }else{
