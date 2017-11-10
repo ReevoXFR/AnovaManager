@@ -28,8 +28,8 @@ public class CompanyO_Account extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
         final TextView tv = (TextView) findViewById(R.id.textViewCont);
-
-
+        final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, employeeList);
+        listView.setAdapter(adapter);
         myRef.child("Employees").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -38,6 +38,7 @@ public class CompanyO_Account extends AppCompatActivity {
                     Employee employee = child.getValue(Employee.class);
                     employeeList.add(employee.getName());
                     tv.append(employee.getName());
+                    adapter.notifyDataSetChanged();
                 }
 
             }
@@ -47,9 +48,10 @@ public class CompanyO_Account extends AppCompatActivity {
 
             }
         });
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, employeeList);
 
-        listView.setAdapter(adapter);
+
+
+
     }
 
 }
