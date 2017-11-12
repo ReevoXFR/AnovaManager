@@ -4,29 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.osiris.testapp.Employee_Login"
     android:background="@drawable/background_gradient"
+    tools:context="com.example.osiris.testapp.Employee_Login"
 
     >
-
-    <TextView
-        android:id="@+id/forgotPassword2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="sans-serif-smallcaps"
-        android:onClick="resetPassword"
-        android:text="Forgot password? Click here!"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/emailTextID"
@@ -38,6 +19,7 @@
         android:backgroundTint="@color/white"
         android:ems="10"
         android:hint="Username"
+        android:textColorHint="@color/white"
         android:inputType="textEmailAddress"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -45,6 +27,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:textColorHint="@color/white"
         android:id="@+id/passwordTextID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,6 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailTextID" />
     //testaa
+
     <Button
         android:id="@+id/buttonLoginID"
         android:layout_width="213dp"
@@ -89,5 +73,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/white" />
+
+    <TextView
+        android:alpha="0.75"
+        android:id="@+id/forgotPasswordEmployer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-smallcaps"
+        android:onClick="resetPassword"
+        android:text="Forgot password? Click here!"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.97" />
 
 </android.support.constraint.ConstraintLayout>

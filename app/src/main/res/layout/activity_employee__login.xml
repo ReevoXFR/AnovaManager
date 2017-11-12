@@ -10,7 +10,7 @@
     >
 
     <TextView
-        android:id="@+id/forgotPassword"
+        android:id="@+id/forgotPasswordEmployee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -20,13 +20,14 @@
         android:fontFamily="sans-serif-smallcaps"
         android:onClick="resetPassword"
         android:text="Forgot password? Click here!"
+        android:alpha="0.75"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.984" />
 
     <EditText
         android:id="@+id/emailTextID"
