@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.osiris.testapp.AccountSettings"
+    android:background="@drawable/background_gradient">
+
+    <TextView
+        android:id="@+id/nametv"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Change name:" />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:text="Enter new name"
+        app:layout_constraintTop_toBottomOf="@+id/nametv"
+        tools:layout_editor_absoluteY="30dp"
+        android:id="@+id/changeName"/>
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="55dp"
+        android:text="Change name"
+        android:id="@+id/changeNameButton"
+        app:layout_constraintTop_toBottomOf="@id/changeName"
+        android:onClick="changeName"/>
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:text="Change email:"
+        android:id="@+id/emailtv"
+        app:layout_constraintTop_toBottomOf="@+id/changeNameButton"
+        android:layout_marginTop="50dp"/>
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:text="Enter new email"
+        app:layout_constraintTop_toBottomOf="@+id/emailtv"
+        android:id="@+id/changeEmail"/>
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="55dp"
+        android:text="Change Email"
+        app:layout_constraintTop_toBottomOf="@+id/changeEmail"
+        android:id="@+id/save"
+        android:onClick="changeEmail"/>
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="Change password:"
+        android:id="@+id/passwordtv"
+        app:layout_constraintTop_toBottomOf="@+id/save"
+        android:layout_marginTop="50dp"/>
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:text="Enter new password"
+        app:layout_constraintTop_toBottomOf="@+id/passwordtv"
+        android:id="@+id/passwordAccSettings"/>
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:text="Re-type new password"
+        app:layout_constraintTop_toBottomOf="@+id/passwordAccSettings"
+        android:id="@+id/passwordAccSettings2" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toBottomOf="@+id/passwordAccSettings2"
+        android:text="Change password"
+        android:onClick="changePassword"/>
+
+
+
+</android.support.constraint.ConstraintLayout>
