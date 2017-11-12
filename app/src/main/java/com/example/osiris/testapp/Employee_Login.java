@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,18 +41,18 @@ public class Employee_Login extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
 
-        loginButton = (Button)findViewById(R.id.buttonLoginID);
+        loginButton = (Button) findViewById(R.id.buttonLoginID);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(firebaseAuth.getCurrentUser() != null){
+                if (firebaseAuth.getCurrentUser() != null) {
 
                 }
             }
         };
 
-        loginButton.setOnClickListener(new View.OnClickListener(){
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startSignIn();
@@ -86,23 +87,23 @@ public class Employee_Login extends AppCompatActivity {
         mAuth.addAuthStateListener(mAuthListener);
     }
 
-    private void startSignIn(){
+    private void startSignIn() {
         progressDialog.setMessage("Logging in ...");
         progressDialog.show();
         String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
-        if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             Toast.makeText(Employee_Login.this, "The fields are empty", Toast.LENGTH_LONG).show();
-        }else{
+        } else {
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(mAuth.getCurrentUser().isEmailVerified() ==  false) {
+                    if (mAuth.getCurrentUser().isEmailVerified() == false) {
                         Toast.makeText(Employee_Login.this, "Email not verified", Toast.LENGTH_LONG).show();
                     }
-                    if(!task.isSuccessful()){
+                    if (!task.isSuccessful()) {
                         Toast.makeText(Employee_Login.this, "Sign in problem", Toast.LENGTH_LONG).show();
-                    }else{
+                    } else {
                         startActivity(new Intent(Employee_Login.this, Employee_Account.class));
                         finish();
                         progressDialog.dismiss();
@@ -115,5 +116,9 @@ public class Employee_Login extends AppCompatActivity {
 
     }
 
+    public void resetPassword(View view) {
+        Intent intent = new Intent( this, Reset_Password.class);
+        startActivity(intent);
+    }
 
 }

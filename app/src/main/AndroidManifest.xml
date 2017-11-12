@@ -30,6 +30,7 @@
         <activity android:name=".Employee_Account" />
         <activity android:name=".CreateUser" />
         <activity android:name=".CompanyO_Account"></activity>
+        <activity android:name=".Reset_Password"/>
     </application>
 
 </manifest>

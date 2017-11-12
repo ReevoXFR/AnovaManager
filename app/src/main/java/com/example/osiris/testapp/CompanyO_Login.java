@@ -121,5 +121,10 @@ public class CompanyO_Login extends AppCompatActivity {
 
     }
 
+    public void resetPassword(View view) {
+        Intent intent = new Intent( this, Reset_Password.class);
+        startActivity(intent);
+    }
+
 
 }

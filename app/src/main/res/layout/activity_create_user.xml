@@ -8,60 +8,121 @@
     android:background="@drawable/background_gradient">
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Email:"
-        android:id="@+id/txt1"/>
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
         android:id="@+id/email"
-        app:layout_constraintTop_toBottomOf="@+id/txt1"
-        />
-    <TextView
-        android:layout_width="match_parent"
+        android:layout_width="305dp"
         android:layout_height="50dp"
-        android:text="Name:"
-        android:id="@+id/txt2"
-        app:layout_constraintTop_toBottomOf="@+id/email"/>
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:alpha="0.5"
+        android:backgroundTint="@color/white"
+        android:hint="Email"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:textColorHighlight="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="1.0" />
+
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
         android:id="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/txt2"/>
-    <TextView
-        android:layout_width="match_parent"
+        android:textColor="@color/white"
+        android:layout_width="305dp"
         android:layout_height="50dp"
-        android:text="Password:"
-        android:id="@+id/txt3"
-        app:layout_constraintTop_toBottomOf="@+id/name"/>
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:alpha="0.5"
+        android:backgroundTint="@color/white"
+        android:hint="Complete name "
+        android:textAlignment="center"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.654" />
+
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
         android:id="@+id/password"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@+id/txt3"/>
-    <TextView
-        android:layout_width="match_parent"
+        android:textColor="@color/white"
+        android:layout_width="305dp"
         android:layout_height="50dp"
-        android:text="Retype the password:"
-        android:id="@+id/txt4"
-        app:layout_constraintTop_toBottomOf="@+id/password"/>
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:alpha="0.5"
+        android:backgroundTint="@color/white"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.754" />
+
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
         android:id="@+id/password2"
+        android:textColor="@color/white"
+        android:layout_width="305dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:alpha="0.5"
+        android:backgroundTint="@color/white"
+        android:hint="Enter password again"
         android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@+id/txt4"/>
+        android:textAlignment="center"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.854" />
 
     <Button
+        android:id="@+id/createBtn"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:id="@+id/createBtn"
-        app:layout_constraintTop_toBottomOf="@+id/password2"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:onClick="createUser"
         android:text="CREATE"
-        android:onClick="createUser"/>
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password2" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="304dp"
+        android:layout_height="202dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/white_two" />
 
 
 </android.support.constraint.ConstraintLayout>
