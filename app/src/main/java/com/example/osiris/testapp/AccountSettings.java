@@ -55,9 +55,9 @@ public class AccountSettings extends AppCompatActivity {
 
     }
 
-    public void changePassword(View view) {
+    public void changePassword(View view) {     // needs testing
         String password = pass.getText().toString();
-        String password2 = pass.getText().toString();
+        String password2 = pass2.getText().toString();
         String oldPass = oldpass.getText().toString();
 
         FirebaseUser user = mAuth.getCurrentUser();
