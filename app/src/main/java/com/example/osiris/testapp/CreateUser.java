@@ -26,7 +26,6 @@ public class CreateUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
-
         mAuth = FirebaseAuth.getInstance();
 
         emailTx = (EditText) findViewById(R.id.email);
@@ -54,15 +53,11 @@ public class CreateUser extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        //mAuth.getCurrentUser().sendEmailVerification();
+                        mAuth.getCurrentUser().sendEmailVerification();
                         if (!task.isSuccessful()) return;
                         Employee employee = new Employee(emailTx.getText().toString());
-
                         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Employees");
-
-
                         String id = myRef.push().getKey();
-
 
                         myRef.child(id).setValue(employee);
                         goMain();

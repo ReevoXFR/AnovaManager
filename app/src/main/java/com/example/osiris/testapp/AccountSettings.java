@@ -38,7 +38,7 @@ public class AccountSettings extends AppCompatActivity {
     }
 
     public void changeEmail(View view) {
-        FirebaseUser user = mAuth.getCurrentUser();
+        final FirebaseUser user = mAuth.getCurrentUser();
 
         String email = changeEmail.getText().toString();
 
@@ -47,7 +47,20 @@ public class AccountSettings extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(AccountSettings.this, "Email updated", Toast.LENGTH_LONG).show();
+                            user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(AccountSettings.this, "Email updated", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(AccountSettings.this, "Please verify the new mail", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(AccountSettings.this, "Unexpected error", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+
+                        } else {
+                            Toast.makeText(AccountSettings.this, "Invalid email", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -55,12 +68,12 @@ public class AccountSettings extends AppCompatActivity {
 
     }
 
-    public void changePassword(View view) {     // needs testing
-        String password = pass.getText().toString();
+    public void changePassword(View view) {
+        final String password = pass.getText().toString();
         String password2 = pass2.getText().toString();
         String oldPass = oldpass.getText().toString();
 
-        FirebaseUser user = mAuth.getCurrentUser();
+        final FirebaseUser user = mAuth.getCurrentUser();
 
 
         if(!password.equals(password2)) {
@@ -74,25 +87,21 @@ public class AccountSettings extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-
+                    user.updatePassword(password).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(AccountSettings.this, "Password updated", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+                    Toast.makeText(AccountSettings.this, "Password changed", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(AccountSettings.this, "Old password is incorrect", Toast.LENGTH_SHORT).show();
-                    return;
                 }
             }
         });
-
-
-
-        user.updatePassword(password).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(AccountSettings.this, "Password updated", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-
     }
+
+
 }

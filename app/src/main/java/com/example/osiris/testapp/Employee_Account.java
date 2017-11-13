@@ -36,4 +36,9 @@ public class Employee_Account extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    public void accSettings(View view) {
+        Intent intent = new Intent( this, AccountSettings.class);
+        startActivity(intent);
+    }
 }
