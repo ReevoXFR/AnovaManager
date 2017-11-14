@@ -91,7 +91,7 @@ public class CompanyO_Login extends AppCompatActivity {
     private void startSignIn(){
         progressDialog.setMessage("Logging in ...");
         progressDialog.show();
-        String email = emailText.getText().toString();
+        final String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
             Toast.makeText(CompanyO_Login.this, "The fields are empty", Toast.LENGTH_LONG).show();
@@ -109,8 +109,10 @@ public class CompanyO_Login extends AppCompatActivity {
                             mAuth.signOut();
                             return;
                         }
-                        startActivity(new Intent(CompanyO_Login.this, CompanyO_Account.class));
+                        Intent intent = (new Intent(CompanyO_Login.this, CompanyO_Account.class));
+                        intent.putExtra("EMAIL", email);
                         finish();
+                        startActivity(intent);
                         progressDialog.dismiss();
                     }
                 }

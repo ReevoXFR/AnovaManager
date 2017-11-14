@@ -8,11 +8,10 @@
     tools:context="com.example.osiris.testapp.CompanyO_Account">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="368dp"
         android:layout_height="317dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <ListView
             android:id="@+id/listCont"
@@ -64,4 +63,36 @@
         android:text="Account settings"
         android:id="@+id/settings"
         android:onClick="accSettings"/>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:onClick="checkIfHasCompany"
+        android:text="Check email"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Create company"
+        android:onClick="goCreate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCont"
+        app:layout_constraintVertical_bias="0.49"
+        />
 </android.support.constraint.ConstraintLayout>

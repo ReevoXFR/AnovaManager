@@ -1,21 +1,22 @@
 package com.example.osiris.testapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by DUMNEZO on 11/14/2017.
  */
 
-public class Company {
+public class Company implements Serializable {
 
     private ArrayList<User> employees;
     private User owner;
     private String key, name;
 
-    public Company(User owner, String name, String key) {
-        this.owner = owner;
+    public Company(String name, User owner) {
         this.name = name;
-        this.key = key;
+        this.owner = owner;
+
     }
 
     public void setOwner(User owner) {

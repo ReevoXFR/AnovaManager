@@ -1,5 +1,6 @@
 package com.example.osiris.testapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -10,11 +11,15 @@ import java.util.ArrayList;
 >>>>>>> Stashed changes
  */
 
-public class User {
+public class User implements Serializable {
 
     private String email, name, key;
     private ArrayList<Company> ownerOf;
     private Company partOf;
+
+    public User(){
+
+    }
 
 
 

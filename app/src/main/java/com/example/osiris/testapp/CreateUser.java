@@ -33,8 +33,6 @@ public class CreateUser extends AppCompatActivity {
         passwordTx2 = (EditText) findViewById(R.id.password2);
         nameTx = (EditText) findViewById(R.id.nameCreateUser);
 
-
-
     }
 
     public void createUser(View view) {
