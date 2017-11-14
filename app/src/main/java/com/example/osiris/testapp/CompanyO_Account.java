@@ -32,15 +32,25 @@ public class CompanyO_Account extends AppCompatActivity {
         final TextView tv = (TextView) findViewById(R.id.textViewCont);
         final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, employeeList);
         listView.setAdapter(adapter);
+
         myRef.child("Employees").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
                 for (DataSnapshot child: children){
-                    User employee = child.getValue(User.class);
-                    employeeList.add(employee.getName());
-                    tv.append(employee.getName());
-                    adapter.notifyDataSetChanged();
+                    String key = "-KyuI-bR1HZwfLA8NT_P";
+
+                    if(child.getKey().equals(key)){
+                        User user = child.getValue(User.class);
+                        employeeList.add(user.getEmail());
+                        tv.append(user.getName() + " \n");
+                        tv.append(user.getEmail() + "\n");
+                        tv.append(user.getKey() + "\n");
+
+                        adapter.notifyDataSetChanged();
+                    }
+
+
                 }
 
             }
