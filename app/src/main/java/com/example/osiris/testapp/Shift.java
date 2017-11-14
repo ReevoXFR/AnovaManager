@@ -2,6 +2,7 @@ package com.example.osiris.testapp;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Timer;
 
@@ -12,7 +13,7 @@ import java.util.Timer;
 public class Shift {
     private GregorianCalendar startHour;
     private GregorianCalendar EndHour;
-    private Timer t;
+
 
     public Shift() {
     }
@@ -24,4 +25,13 @@ public class Shift {
     public void setEndDateAndHour(int day, int month, int year, int hour, int minute) {
         this.EndHour.set(year, month, day, hour, minute);
     }
+
+    public GregorianCalendar getStartHour() {
+        return startHour;
+    }
+
+    public GregorianCalendar getEndHour() {
+        return EndHour;
+    }
+
 }
