@@ -4,29 +4,36 @@ package com.example.osiris.testapp;
  * Created by Osiris on 3/11/2017.
  */
 
-public class user {
+public class User {
 
     public String email;
     public String name;
     public String key;
 
-    public user(String name, String email){
+    public User(String name, String email){
 
         this.email = email;
         this.name = name;
     }
 
-    public user(){
-        this.email = email;
-
+    public User(){
 
     }
 
     public void setName(String name)
     {
-        this.email = name;
+        this.name = name;
+    }
+    public void setEmail(String email)
+    {
+        this.email= email;
     }
     public String getName(){
+
+        return name;
+    }
+
+    public String getEmail(){
         return email;
     }
 

@@ -37,7 +37,7 @@ public class CompanyO_Account extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
                 for (DataSnapshot child: children){
-                    user employee = child.getValue(user.class);
+                    User employee = child.getValue(User.class);
                     employeeList.add(employee.getName());
                     tv.append(employee.getName());
                     adapter.notifyDataSetChanged();

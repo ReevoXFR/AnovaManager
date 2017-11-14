@@ -49,19 +49,26 @@ public class CreateUser extends AppCompatActivity {
         }
 
 
-        //Method for creating a new user in the firebase
+        //Method for creating a new User in the firebase
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         mAuth.getCurrentUser().sendEmailVerification(); //send email verification
-                        if (!task.isSuccessful()) return;
-                        user employee = new user(nameTx.getText().toString(), emailTx.getText().toString());
+                        if (!task.isSuccessful()) return; // if creating the User fails, stop the method (eventually add a toast here please)
+
+                        //add the user to firebase
+                        User newUser = new User(nameTx.getText().toString(), emailTx.getText().toString());
                         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Employees");
+
+                        //save the key and add keep it for further use
                         String id = myRef.push().getKey();
-                        employee.setKey(id);
-                        myRef.child(id).setValue(employee);//add
+                        newUser.setKey(id);
+                        myRef.child(id).setValue(newUser);
+
+                        //go back to main page and close the current intent
+                        finish();
                         goMain();
 
 
