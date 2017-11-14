@@ -20,7 +20,7 @@ public class CreateUser extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-    private EditText emailTx, passwordTx, passwordTx2, name;
+    private EditText emailTx, passwordTx, passwordTx2, nameTx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +28,10 @@ public class CreateUser extends AppCompatActivity {
         setContentView(R.layout.activity_create_user);
         mAuth = FirebaseAuth.getInstance();
 
-        emailTx = (EditText) findViewById(R.id.email);
+        emailTx = (EditText) findViewById(R.id.emailCreateUser);
         passwordTx = (EditText) findViewById(R.id.password);
         passwordTx2 = (EditText) findViewById(R.id.password2);
+        nameTx = (EditText) findViewById(R.id.nameCreateUser);
 
 
 
@@ -48,19 +49,23 @@ public class CreateUser extends AppCompatActivity {
         }
 
 
-
+        //Method for creating a new user in the firebase
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        mAuth.getCurrentUser().sendEmailVerification();
+
+                        mAuth.getCurrentUser().sendEmailVerification(); //send email verification
                         if (!task.isSuccessful()) return;
-                        Employee employee = new Employee(emailTx.getText().toString());
+                        user employee = new user(nameTx.getText().toString(), emailTx.getText().toString());
                         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Employees");
                         String id = myRef.push().getKey();
-
+                        employee.setKey(id);
                         myRef.child(id).setValue(employee);
                         goMain();
+
+
+
                     }
                 });
     }
