@@ -64,7 +64,7 @@ public class CreateUser extends AppCompatActivity {
 
                         //save the key and add keep it for further use
                         String id = myRef.push().getKey();
-                        newUser.setKey(id);
+                        newUser.setKey(id);//
                         myRef.child(id).setValue(newUser);
 
                         //go back to main page and close the current intent
