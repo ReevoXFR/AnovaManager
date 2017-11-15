@@ -70,4 +70,10 @@ public class User implements Serializable {
         return partOf;
     }
 
+    public void setNoCompany(){
+        for (int i = 0;i<ownerOf.size();i++){
+            ownerOf.remove(i);
+        }
+    }
+
 }

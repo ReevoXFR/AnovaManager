@@ -24,10 +24,11 @@ public class CompanyCreate extends AppCompatActivity {
         User user = (User) getIntent().getSerializableExtra("theOwner");
         Company company = new Company(et.getText().toString(), user);
         Log.d("Company check", company.getName() + " NAME" + company.getOwner().getEmail() + " OWNER");
-//        Intent intent = new Intent(this, CompanyO_Account.class);
-//        intent.putExtra("MyCompany", company);
-//        finish();
-//        startActivity(intent);
+        Intent intent = new Intent(this, CompanyO_Account.class);
+        intent.putExtra("MyCompany", company);
+        intent.putExtra("EMAIL", user.getEmail());
+        finish();
+        startActivity(intent);
 //    }
 
 
