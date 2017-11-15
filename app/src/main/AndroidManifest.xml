@@ -31,7 +31,8 @@
         <activity android:name=".CreateUser" />
         <activity android:name=".CompanyO_Account" />
         <activity android:name=".Reset_Password" />
-        <activity android:name=".AccountSettings"></activity>
+        <activity android:name=".AccountSettings" />
+        <activity android:name=".CompanyCreate"></activity>
     </application>
 
 </manifest>
