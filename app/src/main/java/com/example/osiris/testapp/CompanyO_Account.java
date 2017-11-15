@@ -43,7 +43,7 @@ public class CompanyO_Account extends AppCompatActivity {
         final String email = getIntent().getStringExtra("EMAIL");
         hasNoComp = (TextView) findViewById(R.id.textViewEmailCheck);
         thisUser = getCurrentUser();
-        String emailtest = getCurrentUser().getEmail();
+        String emailtest = thisUser.getEmail();
         Log.d("companies",emailtest);
         if (checkIfHasCompany() == false) {
             hasNoComp.setText("You have no company! Create one");
@@ -138,24 +138,18 @@ public class CompanyO_Account extends AppCompatActivity {
         Log.d("tag", email);
         final User[] user2 = new User[1];
         DatabaseReference myRef = database.getReference();
-        Log.e("AAA", "AAA");
 
         myRef.child("Employees").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-                Log.e("AAA", "AAA");
-                for (DataSnapshot child : children) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                    Log.e("AAA", "AAA");
-                    User user = child.getValue(User.class);
+                    User user = snapshot.getValue(User.class);
 
                     if (user.getEmail().equals(email)) {
                         user2[0] = user;
                         Log.d("USER CHECK", user2[0].getEmail());
-
-                    } else {
-                        Log.d("PULAAAAAAAAAAAAAAAAA", user2[0].getEmail());
                     }
 
                 }
