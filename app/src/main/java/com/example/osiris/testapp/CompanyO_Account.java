@@ -1,5 +1,6 @@
 package com.example.osiris.testapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -37,14 +38,48 @@ public class CompanyO_Account extends AppCompatActivity {
         //   final ListView listView = (ListView) findViewById(R.id.listCont);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
+
+        //GETTING THE USER HERE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        myRef.child("Employees").addValueEventListener(new ValueEventListener() {
+
+
+            final String email = getIntent().getStringExtra("EMAIL");
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+
+                for (DataSnapshot child : children) {
+
+
+                    User user = child.getValue(User.class);
+
+                    if (user.getEmail().equals(email)) {
+                        saveUser(user);
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
+        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+        thisUser.getEmail();
+        //Log.d("FINALLY", thisUser.getEmail());
+
+
         final TextView tv = (TextView) findViewById(R.id.textViewCont);
         final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, employeeList);
         //  listView.setAdapter(adapter);
-        final String email = getIntent().getStringExtra("EMAIL");
+
         hasNoComp = (TextView) findViewById(R.id.textViewEmailCheck);
-        thisUser = getCurrentUser();
-        String emailtest = thisUser.getEmail();
-        Log.d("companies",emailtest);
+        //String emailtest = thisUser.getEmail();
+        //Log.d("companies",emailtest);
         if (checkIfHasCompany() == false) {
             hasNoComp.setText("You have no company! Create one");
         } else {
@@ -132,36 +167,10 @@ public class CompanyO_Account extends AppCompatActivity {
 
     }
 
-    public User getCurrentUser() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final String email = getIntent().getStringExtra("EMAIL");
-        Log.d("tag", email);
-        final User[] user2 = new User[1];
-        DatabaseReference myRef = database.getReference();
+    public User saveUser(User user) {
+        thisUser = user;
 
-        myRef.child("Employees").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                    User user = snapshot.getValue(User.class);
-
-                    if (user.getEmail().equals(email)) {
-                        user2[0] = user;
-                        Log.d("USER CHECK", user2[0].getEmail());
-                    }
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        return user2[0];
+        return thisUser;
     }
 
 
