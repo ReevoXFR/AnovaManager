@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,67 +25,74 @@ import java.util.List;
 
 public class CompanyO_Account extends AppCompatActivity {
     private User thisUser;
-    private FirebaseAuth mAuth;
+    private Button button;
+
     private FirebaseAuth.AuthStateListener mAuthListener;
     private User currentUser;
     private TextView hasNoComp;
 
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        final List<String> employeeList = new ArrayList<String>();
+        button = (Button)findViewById(R.id.buttonGetUser);
+
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.getCurrentUser().getUid();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employer__account);
+
+
+
+        final String email = getIntent().getStringExtra("EMAIL");
+
         //   final ListView listView = (ListView) findViewById(R.id.listCont);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
 
         //GETTING THE USER HERE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         myRef.child("Employees").addValueEventListener(new ValueEventListener() {
-
-
-            final String email = getIntent().getStringExtra("EMAIL");
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+            DataSnapshot ds;
 
                 for (DataSnapshot child : children) {
 
-
+                    //User user = new User(dataSnapshot.child("name").getValue(String.class), dataSnapshot.child("email").getValue(String.class));
                     User user = child.getValue(User.class);
 
                     if (user.getEmail().equals(email)) {
-                        saveUser(user);
+                        currentUser = user;
+                        Log.d("THIS TAG NOW", currentUser.getEmail());
                     }
-
                 }
-
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
-
         });
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-        thisUser.getEmail();
+       // Log.d("ALOO", users.get(0).getEmail().toString());
         //Log.d("FINALLY", thisUser.getEmail());
 
 
         final TextView tv = (TextView) findViewById(R.id.textViewCont);
-        final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, employeeList);
+        //final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, employeeList);
         //  listView.setAdapter(adapter);
 
         hasNoComp = (TextView) findViewById(R.id.textViewEmailCheck);
         //String emailtest = thisUser.getEmail();
         //Log.d("companies",emailtest);
-        if (checkIfHasCompany() == false) {
-            hasNoComp.setText("You have no company! Create one");
-        } else {
-            hasNoComp.setText("");
-        }
+//        if (checkIfHasCompany() == false) {
+//            hasNoComp.setText("You have no company! Create one");
+//        } else {
+//            hasNoComp.setText("");
+//        }
 
         // THIS METHOD HERE will help with adding employees using the key
 //        myRef.child("Employees").addValueEventListener(new ValueEventListener() {
@@ -117,6 +125,19 @@ public class CompanyO_Account extends AppCompatActivity {
 
 
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //Log.d("", getUser().getEmail());
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+       // Log.d("ONSTART", currentUser.getEmail());
+    }
+
 
     @Override
     protected void onPostResume() {
@@ -181,4 +202,10 @@ public class CompanyO_Account extends AppCompatActivity {
     }
 
 
+    public void getUser(View view) {
+        Log.d("THIS TAG", currentUser.getEmail());
+       // Log.d("THIS TAG", currentUser);
+
+
+    }
 }

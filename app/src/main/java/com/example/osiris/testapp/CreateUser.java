@@ -58,7 +58,7 @@ public class CreateUser extends AppCompatActivity {
 
                         //add the user to firebase
                         User newUser = new User(nameTx.getText().toString(), emailTx.getText().toString());
-                        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Users");
+                        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Employees");
 
                         //save the key and add keep it for further use
                         String id = myRef.push().getKey();

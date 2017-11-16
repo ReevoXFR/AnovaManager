@@ -56,14 +56,14 @@
         android:onClick="accSettings"/>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonGetUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:onClick="checkIfHasCompany"
-        android:text="Check email"
+        android:onClick="getUser"
+        android:text="Get User"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
