@@ -1,57 +1,42 @@
 package com.example.osiris.testapp;
 
 import android.content.Intent;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-
-import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.Calendar;
 
 public class Employee_Account extends AppCompatActivity {
 
-    private Button button;
-    private FirebaseAuth mAuth;
-
-    private Calendar calendar = Calendar.getInstance();
-
-    private EditText day, month, year;
-
+    DrawerLayout mDrawerLayout;
+    ActionBarDrawerToggle mToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account__employee);
 
-        day = (EditText) findViewById(R.id.day);
-        month = (EditText) findViewById(R.id.month);
-        year = (EditText) findViewById(R.id.year);
-        int day2 = calendar.get(Calendar.DAY_OF_MONTH);
-        int month2 = calendar.get(Calendar.MONTH);
-        int year2 = calendar.get(Calendar.YEAR);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawable_menu_employee_account);
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.open, R.string.close);
 
-        day.setText(String.valueOf(day2));
-        month.setText(String.valueOf(month2));
-        year.setText(String.valueOf(year2));
+        mDrawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mAuth = FirebaseAuth.getInstance();
-        button = (Button)findViewById(R.id.logoutButtonEmployee);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-                finish();
-                goBackToMainPage();     // just creating a new intent was giving an error?
-            }
-        });
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-    }//asdasd
+        if(mToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
-    public void goBackToMainPage() {
+    public void goBackToMainPage(MenuItem item) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
@@ -60,4 +45,11 @@ public class Employee_Account extends AppCompatActivity {
         Intent intent = new Intent( this, AccountSettings.class);
         startActivity(intent);
     }
+
 }
+
+
+
+
+
+

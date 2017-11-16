@@ -4,6 +4,10 @@
     <string name="Employee_Intent">Employee</string>
     <string name="title_activity_login_employee">Sign in</string>
 
+    <!-- Strings related to Employee Drawer Menu -->
+    <string name ="open">Open</string>
+    <string name ="close">Close</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
@@ -13,8 +17,8 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."
+
     </string>
     <string name="createAccount_message">New user? Click here to create new account!</string>
 </resources>

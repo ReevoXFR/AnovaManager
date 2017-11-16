@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/nav_account"
+        android:title="My Account"
+        android:icon="@mipmap/ic_account_box_white_24dp"/>
+
+    <item android:id="@+id/nav_settings"
+        android:title="Settings"
+        android:icon="@mipmap/ic_settings_white_24dp"/>
+
+    <item android:id="@+id/nav_logoutButtonEmployee"
+        android:title="Logout"
+        android:onClick="goBackToMainPage"
+        android:icon="@mipmap/ic_exit_to_app_white_24dp" />
+
+</menu>
