@@ -52,7 +52,7 @@ public class CompanyO_Account extends AppCompatActivity {
         DatabaseReference myRef = database.getReference();
 
         //GETTING THE USER HERE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-        myRef.child("Employees").addValueEventListener(new ValueEventListener() {
+        myRef.child("Users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
