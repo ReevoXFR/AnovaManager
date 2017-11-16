@@ -16,6 +16,10 @@ public class Company implements Serializable {
     public Company(String name, User owner) {
         this.name = name;
         this.owner = owner;
+        employees = new ArrayList<>();
+
+    }
+    public Company(){
 
     }
 

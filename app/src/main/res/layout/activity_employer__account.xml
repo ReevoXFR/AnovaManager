@@ -19,6 +19,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:text="You have this employees:" />
     </LinearLayout>
 
 
@@ -86,4 +92,15 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewCont"
         app:layout_constraintVertical_bias="0.49"
         />
+
+    <Button
+        android:onClick="addEmployee"
+        android:id="@+id/buttonAddEmployee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="160dp"
+        android:text="Add Employee"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/buttonGetUser" />
 </android.support.constraint.ConstraintLayout>

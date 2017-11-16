@@ -2,6 +2,7 @@ package com.example.osiris.testapp;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,10 +28,11 @@ public class CompanyO_Account extends AppCompatActivity {
     private User thisUser;
     private Button button;
 
+
     private FirebaseAuth.AuthStateListener mAuthListener;
     private User currentUser;
     private TextView hasNoComp;
-
+    private TextView tv3;
     private FirebaseAuth mAuth;
 
     @Override
@@ -42,7 +44,7 @@ public class CompanyO_Account extends AppCompatActivity {
         mAuth.getCurrentUser().getUid();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employer__account);
-
+        tv3 = (TextView) findViewById(R.id.textView3);
 
 
         final String email = getIntent().getStringExtra("EMAIL");
@@ -125,28 +127,24 @@ public class CompanyO_Account extends AppCompatActivity {
 
 
     }
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //Log.d("", getUser().getEmail());
 
-    }
 
     @Override
     protected void onResume() {
         super.onResume();
-       // Log.d("ONSTART", currentUser.getEmail());
+      checkIfHasCompany();
+      checkForEmployees();
     }
 
 
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        if (checkIfHasCompany() == false) {
-            hasNoComp.setText("You have no company! Create one");
-        } else {
-            hasNoComp.setText("You do have a company now yaay");
-        }
+//        if (checkIfHasCompany() == false) {
+//            hasNoComp.setText("You have no company! Create one");
+//        } else {
+//            hasNoComp.setText("You do have a company now yaay");
+//        }
     }
 
     public void accSettings(View view) {
@@ -154,37 +152,51 @@ public class CompanyO_Account extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public boolean checkIfHasCompany() {
-        //not available from up there idk why
+    public void checkForEmployees(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final String email = getIntent().getStringExtra("EMAIL");
-        final boolean[] a = {false};
-        DatabaseReference myRef = database.getReference();
-        Toast.makeText(this, "lala", Toast.LENGTH_SHORT).show();
-        myRef.child("Employees").addValueEventListener(new ValueEventListener() {
+        DatabaseReference myRef = database.getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("COMPANY ID MAKE JUST ONE PLEASE").child("Employees");
+
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-                for (DataSnapshot child : children) {
-
-                    User user = child.getValue(User.class);
-                    Log.d("new try ", user.getEmail() + " here");
-                    if (user.getEmail().equals(email) && user.getCompanies() != null) {
-                        a[0] = true;
-                    } else {
-                        Log.d("", "has no company");
-                    }
+                User user = dataSnapshot.getValue(User.class);
+                if(user == null){
+                    tv3.append(" NO EMPLOYEES");
+                }else{
+                    tv3.append(user.getName());
                 }
             }
-
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
+    }
+    public void checkIfHasCompany() {
+        //not available from up there idk why
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("COMPANY ID MAKE JUST ONE PLEASE");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Company comp = dataSnapshot.getValue(Company.class);
+                if (comp == null) {
+                    hasNoComp.setText("You have no company");
+                } else {
+                    hasNoComp.setText("You have the company: " + comp.getName());
+                }
+            }
 
-        return a[0];
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+
+//        Toast.makeText(this, "lala", Toast.LENGTH_SHORT).show();
+//        myRef.child("Employees").child(mAuth.getCurrentUser().getUid()).child("")
+
 
     }
 
@@ -197,7 +209,6 @@ public class CompanyO_Account extends AppCompatActivity {
 
     public void goCreate(View view) {
         Intent intent = new Intent(this, CompanyCreate.class);
-        intent.putExtra("theOwner",currentUser);
         startActivity(intent);
     }
 
@@ -207,5 +218,10 @@ public class CompanyO_Account extends AppCompatActivity {
        // Log.d("THIS TAG", currentUser);
 
 
+    }
+
+    public void addEmployee(View view) {
+        Intent intent = new Intent(this, CompanyCreate.class);
+        startActivity(intent);
     }
 }
