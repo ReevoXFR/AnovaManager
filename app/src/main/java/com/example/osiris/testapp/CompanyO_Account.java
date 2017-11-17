@@ -126,15 +126,15 @@ public class CompanyO_Account extends AppCompatActivity {
 //            }
 //        });
 
-
+        checkIfHasCompany();
+        checkForEmployees();
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-      checkIfHasCompany();
-      checkForEmployees();
+
     }
 
 
@@ -165,7 +165,7 @@ public class CompanyO_Account extends AppCompatActivity {
                     tv3.setText(" NO EMPLOYEES");
                     return;
                 }else{
-                    tv3.append(user.getName());
+                    tv3.append(user.getName() + " ");
                 }
             }
 

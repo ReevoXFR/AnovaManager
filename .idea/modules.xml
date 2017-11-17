@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/AnovaManager.iml" filepath="$PROJECT_DIR$/AnovaManager.iml" />
       <module fileurl="file://D:\Android Project\TestApp\AnovaManager.iml" filepath="D:\Android Project\TestApp\AnovaManager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/TestApp.iml" filepath="$PROJECT_DIR$/TestApp.iml" />
       <module fileurl="file://C:\Users\Osiris\AndroidStudioProjects\AnovaManager\TestApp.iml" filepath="C:\Users\Osiris\AndroidStudioProjects\AnovaManager\TestApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
