@@ -1,6 +1,7 @@
 package com.example.osiris.testapp;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -15,6 +16,7 @@ public class User implements Serializable {
 
     private String email, name, key;
     private ArrayList<Company> ownerOf;
+    private ArrayList<Shift> shifts;
     private Company partOf;
 
     public User(){
@@ -74,6 +76,18 @@ public class User implements Serializable {
         for (int i = 0;i<ownerOf.size();i++){
             ownerOf.remove(i);
         }
+    }
+
+    public void addShift(Shift shift) {
+        shifts.add(shift);
+    }
+
+    public void removeShift(Shift shift) {
+        shifts.remove(shift);
+    }
+
+    public ArrayList<Shift> getShifts() {
+        return shifts;
     }
 
 }

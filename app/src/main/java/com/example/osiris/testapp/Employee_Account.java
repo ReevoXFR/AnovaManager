@@ -5,18 +5,49 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Calendar;
 
 public class Employee_Account extends AppCompatActivity {
 
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mToggle;
+    private EditText day, month , year, startHour, startMin, endHour, endMin;
+    private Calendar calendar;
+    private User currentUser;
+    private String email, key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account__employee);
+
+        email = getIntent().getStringExtra("EMAIL");
+
+        day = (EditText) findViewById(R.id.day);
+        month = (EditText) findViewById(R.id.month);
+        year = (EditText) findViewById(R.id.year);
+
+        startHour = (EditText) findViewById(R.id.startHour);
+        startMin = (EditText) findViewById(R.id.startMin);
+        endHour = (EditText) findViewById(R.id.startHour2);
+        endMin = (EditText) findViewById(R.id.startMin2);
+
+        calendar = Calendar.getInstance();
+
+        day.setText(String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
+        month.setText(String.valueOf(calendar.get(Calendar.MONTH)));
+        year.setText(String.valueOf(calendar.get(Calendar.YEAR)));
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawable_menu_employee_account);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.open, R.string.close);
@@ -24,6 +55,29 @@ public class Employee_Account extends AppCompatActivity {
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference();
+
+        //GETTING THE USER HERE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        myRef.child("Users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                for (DataSnapshot child : children) {
+                    User user = child.getValue(User.class);
+                    if (user.getEmail().equals(email)) {
+                        currentUser = user;
+                        key = child.getKey();
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 //
@@ -46,6 +100,31 @@ public class Employee_Account extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void addShift(View view) {
+        int dd = Integer.parseInt(day.getText().toString());
+        int mm = Integer.parseInt(month.getText().toString());
+        int yy = Integer.parseInt(year.getText().toString());
+        //Shift shift = new Shift(dd,mm,yy, Integer.parseInt(startHour.getText().toString()), Integer.parseInt(startMin.getText().toString()));
+        Shift shift = new Shift();
+        shift.setStartDateAndHour(dd,mm,yy, Integer.parseInt(startHour.getText().toString()), Integer.parseInt(startMin.getText().toString()));
+        int endH = Integer.parseInt(endHour.getText().toString());
+        int endM = Integer.parseInt(endMin.getText().toString());
+        shift.setEndDateAndHour(dd,mm,yy, endH, endM );
+
+        currentUser.addShift(shift);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference();
+
+        User user = currentUser;
+
+        myRef.child("Shifts").child(key).setValue(user);
+
+
+
+
+
+    }
 }
 
 

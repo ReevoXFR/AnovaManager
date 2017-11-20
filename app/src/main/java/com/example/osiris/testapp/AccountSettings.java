@@ -16,11 +16,18 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class AccountSettings extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private EditText changeEmail, pass, pass2, oldpass;
+    private EditText changeEmail, pass, pass2, oldpass, changeName;
+    private User currentUser;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +39,55 @@ public class AccountSettings extends AppCompatActivity {
         pass = (EditText) findViewById(R.id.passwordAccSettings);
         pass2 = (EditText) findViewById(R.id.passwordAccSettings2);
         oldpass = (EditText) findViewById(R.id.oldPasswordAccSettings);
+        changeName = (EditText) findViewById(R.id.changeName);
+
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference();
+
+        final String email = getIntent().getStringExtra("EMAIL");
+        //GETTING THE USER HERE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        myRef.child("Users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                for (DataSnapshot child : children) {
+                    //User user = new User(dataSnapshot.child("name").getValue(String.class), dataSnapshot.child("email").getValue(String.class));
+                    User user = child.getValue(User.class);
+
+                    if (user.getEmail().equals(email)) {
+                        currentUser = user;
+                        id = child.getKey();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public void changeName(View view) {     //TO BE COMPLETED
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference();
+        User user = currentUser;
+        user.setName(changeName.getText().toString());
+        myRef.child("Users").child(id).setValue(user);
+
+
     }
 
     public void changeEmail(View view) {
         final FirebaseUser user = mAuth.getCurrentUser();
 
         String email = changeEmail.getText().toString();
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = database.getReference();
+        final User user2 = currentUser;
+        user2.setEmail(email);
 
         user.updateEmail(email)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -53,6 +100,8 @@ public class AccountSettings extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(AccountSettings.this, "Email updated", Toast.LENGTH_LONG).show();
                                         Toast.makeText(AccountSettings.this, "Please verify the new mail", Toast.LENGTH_LONG).show();
+                                        myRef.child("Users").child(id).setValue(user2);
+
                                     } else {
                                         Toast.makeText(AccountSettings.this, "Unexpected error", Toast.LENGTH_LONG).show();
                                     }

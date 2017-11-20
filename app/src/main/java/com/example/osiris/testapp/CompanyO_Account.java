@@ -77,11 +77,6 @@ public class CompanyO_Account extends AppCompatActivity {
 
             }
         });
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-       // Log.d("ALOO", users.get(0).getEmail().toString());
-        //Log.d("FINALLY", thisUser.getEmail());
-
 
         final TextView tv = (TextView) findViewById(R.id.textViewCont);
         //final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, employeeList);
@@ -149,6 +144,7 @@ public class CompanyO_Account extends AppCompatActivity {
 
     public void accSettings(View view) {
         Intent intent = new Intent(this, AccountSettings.class);
+        intent.putExtra("EMAIL", currentUser.getEmail());
         startActivity(intent);
     }
 
