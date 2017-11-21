@@ -8,9 +8,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,12 +28,16 @@ public class Employee_Account extends AppCompatActivity {
     private Calendar calendar;
     private User currentUser;
     private String email, key;
+    FirebaseAuth mAuth;
+    private Button seeShiftsButton;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account__employee);
+
+        seeShiftsButton = (Button)findViewById(R.id.buttonSeeAllShifts);
 
         email = getIntent().getStringExtra("EMAIL");
 
@@ -66,6 +71,7 @@ public class Employee_Account extends AppCompatActivity {
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        mAuth = FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
 
@@ -79,6 +85,7 @@ public class Employee_Account extends AppCompatActivity {
                     if (user.getEmail().equals(email)) {
                         currentUser = user;
                         key = child.getKey();
+                       seeShiftsButton.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -86,6 +93,7 @@ public class Employee_Account extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
+
         });
 
     }
@@ -175,7 +183,9 @@ public class Employee_Account extends AppCompatActivity {
     }
 
     public void seeShifts(View view) {
-        Intent intent = new Intent(this, seeShifts.class);
+        Intent intent = new Intent(this, SeeShifts2.class);
+        intent.putExtra("key", mAuth.getCurrentUser().getUid());
+        intent.putExtra("ownerKey", currentUser.getCompanyOwner());
         startActivity(intent);
     }
 }

@@ -102,6 +102,7 @@ public class Employee_Login extends AppCompatActivity {
 
         final String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
+
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             Toast.makeText(Employee_Login.this, "The fields are empty", Toast.LENGTH_LONG).show();
 
