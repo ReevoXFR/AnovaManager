@@ -110,10 +110,10 @@ public class Employee_Account extends AppCompatActivity {
 
     public void addShift(View view) {
         //check if the user is part of a company
-        if(currentUser.getPartOf()==null) {
-            Toast.makeText(Employee_Account.this, "You are not part of a company!", Toast.LENGTH_LONG).show();
-            return;
-        }
+//        if(currentUser.getPartOf()==null) {
+//            Toast.makeText(Employee_Account.this, "You are not part of a company!", Toast.LENGTH_LONG).show();
+//            return;
+//        }
 
 
         int dd = Integer.parseInt(day.getText().toString());
@@ -123,8 +123,8 @@ public class Employee_Account extends AppCompatActivity {
         int mm2 = Integer.parseInt(month2.getText().toString());
         int yy2 = Integer.parseInt(year2.getText().toString());
 
-        //Shift shift = new Shift(dd,mm,yy, Integer.parseInt(startHour.getText().toString()), Integer.parseInt(startMin.getText().toString()));
-        Shift shift = new Shift();
+        final Shift shift = new Shift();
+
         shift.setStartDateAndHour(dd,mm,yy, Integer.parseInt(startHour.getText().toString()), Integer.parseInt(startMin.getText().toString()));
         int endH = Integer.parseInt(endHour.getText().toString());
         int endM = Integer.parseInt(endMin.getText().toString());
@@ -139,16 +139,24 @@ public class Employee_Account extends AppCompatActivity {
         myRef.child(id).setValue(shift);
 
 
+        final String ownerKey = currentUser.getCompanyOwner();
 
-        myRef.child("Users").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef3 = database.getReference();
+        myRef3.child("Users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
                 for (DataSnapshot child : children) {
                     User user = child.getValue(User.class);
-                    if (user.getEmail().equals(email)) {
-                        currentUser = user;
-                        //key = child.getKey();
+
+                    if (user.getKey().equals(ownerKey)) {
+
+                        DatabaseReference myRef2 = FirebaseDatabase.getInstance().getReference().child("Users").child(ownerKey).child("COMPANY ID MAKE JUST ONE PLEASE").child("Employees").child(currentUser.getKey()).child("Shifts");
+                        String id = myRef2.push().getKey();
+                        myRef2.child(id).setValue(shift);
+                        Log.d("AAA","SSSSSS" );
+
                     }
                 }
             }
