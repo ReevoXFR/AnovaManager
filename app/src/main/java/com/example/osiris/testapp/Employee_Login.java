@@ -3,6 +3,8 @@ package com.example.osiris.testapp;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,23 +20,27 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
+
 public class Employee_Login extends AppCompatActivity {
 
     private EditText emailText;
     private EditText passwordText;
-    private Button loginButton;
+    //private Button loginButton;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     private ProgressDialog progressDialog;
 
-    private String email;
+    CircularProgressButton circularProgressButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee__login);
+
+       circularProgressButton = (CircularProgressButton) findViewById(R.id.buttonLoginID);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -43,7 +49,7 @@ public class Employee_Login extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
 
-        loginButton = (Button) findViewById(R.id.buttonLoginID);
+        //loginButton = (Button) findViewById(R.id.buttonLoginID);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -54,12 +60,13 @@ public class Employee_Login extends AppCompatActivity {
             }
         };
 
+        /*
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startSignIn();
             }
-        });
+        });*/
 
     }
 
@@ -90,30 +97,38 @@ public class Employee_Login extends AppCompatActivity {
     }
 
     private void startSignIn() {
-        progressDialog.setMessage("Logging in ...");
-        progressDialog.show();
-        email = emailText.getText().toString();
+        //progressDialog.setMessage("Logging in ...");
+        //progressDialog.show();
+
+        String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             Toast.makeText(Employee_Login.this, "The fields are empty", Toast.LENGTH_LONG).show();
+
         } else {
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (mAuth.getCurrentUser().isEmailVerified() == false) {
                         Toast.makeText(Employee_Login.this, "Email not verified", Toast.LENGTH_LONG).show();
+                        circularProgressButton.doneLoadingAnimation(Color.parseColor("#333693"), BitmapFactory.decodeResource(getResources(), R.drawable.ic_error));
+                        return;
                     }
                     if (!task.isSuccessful()) {
                         Toast.makeText(Employee_Login.this, "Sign in problem", Toast.LENGTH_LONG).show();
+                        circularProgressButton.doneLoadingAnimation(Color.parseColor("#333693"), BitmapFactory.decodeResource(getResources(), R.drawable.ic_error));
+                        circularProgressButton.stopAnimation();
+                        return;
                     } else {
-                        Intent intent = (new Intent(Employee_Login.this, Employee_Account.class));
-                        intent.putExtra("EMAIL", email);
-                        startActivity(intent);
+
+                        circularProgressButton.doneLoadingAnimation(Color.parseColor("#333693"), BitmapFactory.decodeResource(getResources(), R.drawable.ic_done_white_48dp));
+                        startActivity(new Intent(Employee_Login.this, Employee_Account.class));
                         finish();
-                        progressDialog.dismiss();
+                        //progressDialog.dismiss();
                     }
                 }
             });
+
 
 
         }
@@ -124,5 +139,11 @@ public class Employee_Login extends AppCompatActivity {
         Intent intent = new Intent( this, Reset_Password.class);
         startActivity(intent);
     }
+
+    public void loginEmployee(View view){
+        circularProgressButton.startAnimation();
+        startSignIn();
+    }
+
 
 }

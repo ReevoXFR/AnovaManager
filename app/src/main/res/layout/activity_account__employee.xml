@@ -35,7 +35,7 @@
             android:backgroundTint="@color/grey"
             android:hint="DD"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/grey"
             app:layout_constraintStart_toEndOf="@+id/textView8"
             app:layout_constraintTop_toBottomOf="@+id/dd" />
 
@@ -47,7 +47,7 @@
             android:backgroundTint="@color/grey"
             android:hint="MM"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/grey"
             app:layout_constraintStart_toEndOf="@+id/dd"
             app:layout_constraintTop_toBottomOf="@+id/endHour" />
 
@@ -72,7 +72,7 @@
             android:backgroundTint="@color/grey"
             android:hint="HOUR"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/grey"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 <!-- -->
@@ -85,7 +85,7 @@
             android:backgroundTint="@color/grey"
             android:hint="MINS"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/grey"
             app:layout_constraintStart_toEndOf="@+id/endHour"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -109,7 +109,7 @@
             android:backgroundTint="@color/grey"
             android:hint="HOUR"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/grey"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -123,7 +123,7 @@
             android:backgroundTint="@color/grey"
             android:hint="MINS"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/grey"
             app:layout_constraintStart_toEndOf="@+id/startHour"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -163,7 +163,7 @@
             android:backgroundTint="@color/grey"
             android:hint="DD"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/grey"
             app:layout_constraintStart_toEndOf="@+id/textView7"
             app:layout_constraintTop_toBottomOf="@+id/endHour" />
 
@@ -175,7 +175,7 @@
             android:backgroundTint="@color/grey"
             android:hint="MM"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/grey"
             app:layout_constraintStart_toEndOf="@+id/edd"
             app:layout_constraintTop_toBottomOf="@+id/emm" />
 
@@ -187,7 +187,7 @@
             android:backgroundTint="@color/grey"
             android:hint="YY"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/grey"
             app:layout_constraintStart_toEndOf="@+id/emm"
             app:layout_constraintTop_toBottomOf="@+id/endHour" />
 
