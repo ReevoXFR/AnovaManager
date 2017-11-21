@@ -156,13 +156,13 @@ public class Employee_Account extends AppCompatActivity {
                         String id = myRef2.push().getKey();
                         myRef2.child(id).setValue(shift);
                         Log.d("AAA","SSSSSS" );
+                        return;
 
                     }
                 }
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 
