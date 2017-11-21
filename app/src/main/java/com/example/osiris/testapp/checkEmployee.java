@@ -3,6 +3,7 @@ package com.example.osiris.testapp;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -24,39 +25,41 @@ public class checkEmployee extends AppCompatActivity {
     private ListView listView;
     private ArrayList<String> shifts;
     private ArrayAdapter<String> arrayAdapter;
-    private FirebaseAuth mAuth;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_employee);
-
+        listView = (ListView) findViewById(R.id.shiftListView);
 
         shifts = new ArrayList<>();
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, shifts);
+        listView.setAdapter(arrayAdapter);
 
 
+
+
+        checkForEmployees();
 
 
     }
 
     public void checkForEmployees(){
+        String key = getIntent().getStringExtra("KEY");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("COMPANY ID MAKE JUST ONE PLEASE").child("Employees");
+        DatabaseReference myRef = database.getReference().child("Users").child(key).child("COMPANY ID MAKE JUST ONE PLEASE").child("Employees");
 
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 User user = dataSnapshot.getValue(User.class);
-                if(user == null){
-                    // tv3.setText(" NO EMPLOYEES");
-
-                    return;
-                }else{
-                    shifts.add(user.getEmail());
+                if (user.getEmail().equals(getIntent().getStringExtra("EMAIL"))){
+                    for (int i = 0;i<user.getShifts().size();i++){
+                        //shifts.add(user.getShifts().get(i).toString());
+                    }
                     arrayAdapter.notifyDataSetChanged();
-                    // tv3.append(user.getName() + " ");
                 }
             }
 
