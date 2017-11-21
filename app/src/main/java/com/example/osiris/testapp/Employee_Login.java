@@ -100,7 +100,7 @@ public class Employee_Login extends AppCompatActivity {
         //progressDialog.setMessage("Logging in ...");
         //progressDialog.show();
 
-        String email = emailText.getText().toString();
+        final String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             Toast.makeText(Employee_Login.this, "The fields are empty", Toast.LENGTH_LONG).show();
@@ -122,7 +122,9 @@ public class Employee_Login extends AppCompatActivity {
                     } else {
 
                         circularProgressButton.doneLoadingAnimation(Color.parseColor("#333693"), BitmapFactory.decodeResource(getResources(), R.drawable.ic_done_white_48dp));
-                        startActivity(new Intent(Employee_Login.this, Employee_Account.class));
+                        Intent intent = new Intent(Employee_Login.this, Employee_Account.class);
+                        intent.putExtra("EMAIL", email);
+                        startActivity(intent);
                         finish();
                         //progressDialog.dismiss();
                     }

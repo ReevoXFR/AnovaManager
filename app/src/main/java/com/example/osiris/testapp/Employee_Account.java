@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -108,32 +109,54 @@ public class Employee_Account extends AppCompatActivity {
     }
 
     public void addShift(View view) {
+        //check if the user is part of a company
+        if(currentUser.getPartOf()==null) {
+            Toast.makeText(Employee_Account.this, "You are not part of a company!", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
         int dd = Integer.parseInt(day.getText().toString());
         int mm = Integer.parseInt(month.getText().toString());
         int yy = Integer.parseInt(year.getText().toString());
         int dd2 = Integer.parseInt(day2.getText().toString());
         int mm2 = Integer.parseInt(month2.getText().toString());
         int yy2 = Integer.parseInt(year2.getText().toString());
+
         //Shift shift = new Shift(dd,mm,yy, Integer.parseInt(startHour.getText().toString()), Integer.parseInt(startMin.getText().toString()));
         Shift shift = new Shift();
         shift.setStartDateAndHour(dd,mm,yy, Integer.parseInt(startHour.getText().toString()), Integer.parseInt(startMin.getText().toString()));
         int endH = Integer.parseInt(endHour.getText().toString());
         int endM = Integer.parseInt(endMin.getText().toString());
-        shift.setEndDateAndHour(dd,mm,yy, endH, endM );
+        shift.setEndDateAndHour(dd2,mm2,yy2, endH, endM );
+
+        shift.setUserKey(currentUser.getKey());
 
         currentUser.addShift(shift);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        //DatabaseReference myRef = database.getReference();
-
-
-        User user = currentUser;
-
-       // myRef.child("Shifts").setValue(shift);
-
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Shifts");
-        myRef.push();
-        myRef.child("Shifts").setValue(shift);
+        String id = myRef.push().getKey();
+        myRef.child(id).setValue(shift);
+
+
+
+        myRef.child("Users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                for (DataSnapshot child : children) {
+                    User user = child.getValue(User.class);
+                    if (user.getEmail().equals(email)) {
+                        currentUser = user;
+                        key = child.getKey();
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
 

@@ -17,6 +17,7 @@ public class Shift implements Serializable {
    // public GregorianCalendar startHour;
    // public GregorianCalendar EndHour;
     public int startHour, endHour, startMin, endMin, sdd,smm,syy, edd,emm,eyy;
+    public String userKey, companyName;
 
 
     public Shift() {
@@ -43,6 +44,14 @@ public class Shift implements Serializable {
         eyy=year;
         endHour=hour;
         endMin=minute;
+    }
+
+    public void setUserKey(String key) {
+        userKey=key;
+    }
+
+    public void setCompanyName(String name) {
+        companyName = name;
     }
 
 //    @Exclude

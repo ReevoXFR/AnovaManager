@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class User implements Serializable {
 
-    private String email, name, key;
+    private String email, name, key, companyOwner;
     private ArrayList<Company> ownerOf;
     private ArrayList<Shift> shifts;
     private Company partOf;
@@ -90,6 +90,14 @@ public class User implements Serializable {
 
     public ArrayList<Shift> getShifts() {
         return shifts;
+    }
+
+    public void setCompanyOwner(String key) {
+        companyOwner = key;
+    }
+
+    public String getCompanyOwner() {
+        return companyOwner;
     }
 
 }
