@@ -1,5 +1,6 @@
 package com.example.osiris.testapp;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,13 +13,14 @@ import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         GregorianCalendar gc = new GregorianCalendar();
         Log.d("asd", gc.getTime().toString());
+
+
     }
 
     public void getCompanyView(View view){
