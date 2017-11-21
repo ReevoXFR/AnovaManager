@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.osiris.testapp.Employee_Login"
     android:background="@drawable/background_gradient"
+    tools:context="com.example.osiris.testapp.Employee_Login"
 
     >
 
@@ -13,57 +13,69 @@
         android:id="@+id/forgotPasswordEmployee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="52dp"
+        android:alpha="0.75"
         android:fontFamily="sans-serif-smallcaps"
         android:onClick="resetPassword"
         android:text="Forgot password? Click here!"
-        android:alpha="0.75"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.984" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonLoginID" />
 
     <EditText
         android:id="@+id/emailTextID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="276dp"
+        android:layout_marginTop="60dp"
         android:backgroundTint="@color/white"
         android:ems="10"
         android:hint="Username"
+        android:inputType="textEmailAddress"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        android:inputType="textEmailAddress"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/passwordTextID"
-        android:layout_width="wrap_content"
+        android:layout_width="212dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textColor="@color/white"
         android:backgroundTint="@color/white"
         android:ems="10"
         android:hint="Password"
-        android:textColorHint="@color/white"
         android:inputType="textPassword"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailTextID" />
 
+    <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+        android:id="@+id/buttonLoginID"
+        android:layout_width="223dp"
+        android:layout_height="45dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/shape_default"
+        android:backgroundTint="@color/white"
+        android:onClick="loginEmployee"
+        android:text="Login"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordTextID"
+        app:spinning_bar_color="#000000"
+        app:spinning_bar_padding="6dp"
+        app:spinning_bar_width="4dp"/>
+
+    <!-- OLD LOGIN BUTTON IN CASE OF EMERGENCY, PUT THE PROGRESS BUTTON IN COMMS! THEY HAVE THE SAME ID.
     <Button
         android:id="@+id/buttonLoginID"
         android:layout_width="213dp"
@@ -75,24 +87,21 @@
         android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordTextID"
-        app:layout_constraintVertical_bias="0.032" />
+        app:layout_constraintVertical_bias="0.014" />
+     -->
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="277dp"
         android:layout_height="193dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/white" />
 
 </android.support.constraint.ConstraintLayout>

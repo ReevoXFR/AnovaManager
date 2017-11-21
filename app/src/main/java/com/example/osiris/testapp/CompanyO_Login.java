@@ -3,6 +3,8 @@ package com.example.osiris.testapp;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,18 +19,22 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
+
 public class CompanyO_Login extends AppCompatActivity {
 
     private EditText emailText;
     private EditText passwordText;
-    private Button loginButton;
+    //private Button loginButton;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
+    private CircularProgressButton circularProgressButton;
 
 
-    private ProgressDialog progressDialog;
+
+    //private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +46,11 @@ public class CompanyO_Login extends AppCompatActivity {
         emailText = (EditText) findViewById(R.id.emailTextID);
         passwordText = (EditText) findViewById(R.id.passwordTextID);
 
-        progressDialog = new ProgressDialog(this);
+        //progressDialog = new ProgressDialog(this);
 
-        loginButton = (Button)findViewById(R.id.buttonLoginID);
+        circularProgressButton = (CircularProgressButton) findViewById(R.id.buttonLoginID);
+
+        //loginButton = (Button)findViewById(R.id.buttonLoginID);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -53,12 +61,12 @@ public class CompanyO_Login extends AppCompatActivity {
             }
         };
 
-        loginButton.setOnClickListener(new View.OnClickListener(){
+        /*loginButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 startSignIn();
             }
-        });
+        });*/
 
     }
 
@@ -89,8 +97,8 @@ public class CompanyO_Login extends AppCompatActivity {
     }
 
     private void startSignIn(){
-        progressDialog.setMessage("Logging in ...");
-        progressDialog.show();
+        //progressDialog.setMessage("Logging in ...");
+       // progressDialog.show();
         final String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
@@ -105,7 +113,7 @@ public class CompanyO_Login extends AppCompatActivity {
                     }else{
                         if(!mAuth.getCurrentUser().isEmailVerified()) {
                             Toast.makeText(CompanyO_Login.this, "Email not verified", Toast.LENGTH_LONG).show();
-                            progressDialog.dismiss();
+                            //progressDialog.dismiss();
                             mAuth.signOut();
                             return;
                         }
@@ -113,7 +121,7 @@ public class CompanyO_Login extends AppCompatActivity {
                         intent.putExtra("EMAIL", email);
                         finish();
                         startActivity(intent);
-                        progressDialog.dismiss();
+                        //progressDialog.dismiss();
                     }
                 }
             });
@@ -126,6 +134,14 @@ public class CompanyO_Login extends AppCompatActivity {
     public void resetPassword(View view) {
         Intent intent = new Intent( this, Reset_Password.class);
         startActivity(intent);
+    }
+
+    public void loginCompanyO(View view){
+        startSignIn();
+        circularProgressButton.startAnimation();
+        circularProgressButton.doneLoadingAnimation(Color.parseColor("#333693"), BitmapFactory.decodeResource(getResources(), R.drawable.ic_done_white_48dp));
+
+
     }
 
 

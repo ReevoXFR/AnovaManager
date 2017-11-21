@@ -18,6 +18,7 @@
         android:layout_marginTop="276dp"
         android:backgroundTint="@color/white"
         android:ems="10"
+        android:textColor="@color/white"
         android:hint="Username"
         android:textColorHint="@color/white"
         android:inputType="textEmailAddress"
@@ -36,13 +37,33 @@
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/white"
         android:ems="10"
+        android:textColor="@color/white"
         android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailTextID" />
-    //testaa
+   
+    <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+        android:id="@+id/buttonLoginID"
+        android:layout_width="223dp"
+        android:layout_height="45dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/shape_default"
+        android:backgroundTint="@color/white"
+        android:onClick="loginCompanyO"
+        android:text="Login"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordTextID"
+        app:spinning_bar_color="#000000"
+        app:spinning_bar_padding="6dp"
+        app:spinning_bar_width="4dp" />
 
+    <!--
     <Button
         android:id="@+id/buttonLoginID"
         android:layout_width="213dp"
@@ -56,7 +77,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordTextID"
-        app:layout_constraintVertical_bias="0.032" />
+        app:layout_constraintVertical_bias="0.032" /> -->
 
     <ImageView
         android:id="@+id/imageView"
