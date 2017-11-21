@@ -14,9 +14,9 @@ import java.util.Timer;
  */
 
 public class Shift implements Serializable {
-   // public GregorianCalendar startHour;
-   // public GregorianCalendar EndHour;
-    public int startHour, endHour, startMin, endMin, sdd,smm,syy, edd,emm,eyy;
+    // public GregorianCalendar startHour;
+    // public GregorianCalendar EndHour;
+    public int startHour, endHour, startMin, endMin, sdd, smm, syy, edd, emm, eyy;
     public String userKey, companyName;
 
 
@@ -31,27 +31,33 @@ public class Shift implements Serializable {
 
     public void setStartDateAndHour(int year, int month, int day, int hour, int minute) {
         sdd = day;
-        smm=month;
-        syy=year;
-        startHour=hour;
-        startMin=minute;
+        smm = month;
+        syy = year;
+        startHour = hour;
+        startMin = minute;
 
     }
 
     public void setEndDateAndHour(int year, int month, int day, int hour, int minute) {
         edd = day;
-        emm=month;
-        eyy=year;
-        endHour=hour;
-        endMin=minute;
+        emm = month;
+        eyy = year;
+        endHour = hour;
+        endMin = minute;
     }
 
     public void setUserKey(String key) {
-        userKey=key;
+        userKey = key;
     }
 
     public void setCompanyName(String name) {
         companyName = name;
+    }
+
+    public String toString() {
+        String s = "";
+        s =  sdd + "/" + smm + "/" + syy +" " + startHour + ":"+ startMin + "  -  " + edd + "/" + emm + "/" + eyy + " " + endHour + ":" + endMin;
+        return s;
     }
 
 //    @Exclude

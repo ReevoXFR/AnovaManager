@@ -32,12 +32,10 @@ public class SeeShifts2 extends AppCompatActivity {
         String ownerKey = getIntent().getStringExtra("ownerKey");
         String userKey = getIntent().getStringExtra("key");
 
-
-        listView = (ListView) findViewById(R.id.shiftListView);
         list = new ArrayList<String>();
-        arrayAdapter = new ArrayAdapter<String>(SeeShifts2.this, android.R.layout.simple_list_item_1, list);
+        listView = (ListView) findViewById(R.id.listOfShifts);
 
-        list.add("vlad");
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
 
 
         listView.setAdapter(arrayAdapter);
