@@ -25,7 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emm" />
+            app:layout_constraintTop_toBottomOf="@+id/mm" />
 
         <EditText
             android:id="@+id/edd"
@@ -36,7 +36,7 @@
             android:hint="DD"
             android:textColor="@color/white"
             android:textColorHint="@color/grey"
-            app:layout_constraintEnd_toStartOf="@+id/mm"
+            app:layout_constraintEnd_toStartOf="@+id/emm"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
         <EditText
@@ -51,18 +51,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
         <EditText
             android:id="@+id/eyy"
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/grey"
             android:hint="YY"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            app:layout_constraintStart_toEndOf="@+id/mm"
+            app:layout_constraintStart_toEndOf="@+id/emm"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
         <EditText
@@ -112,7 +112,7 @@
             android:textColor="@color/white"
             android:textColorHint="@color/grey"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.428"
+            app:layout_constraintHorizontal_bias="0.413"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -126,7 +126,7 @@
             android:textColor="@color/white"
             android:textColorHint="@color/grey"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.563"
+            app:layout_constraintHorizontal_bias="0.575"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -168,7 +168,7 @@
             android:hint="DD"
             android:textColor="@color/white"
             android:textColorHint="@color/grey"
-            app:layout_constraintEnd_toStartOf="@+id/emm"
+            app:layout_constraintEnd_toStartOf="@+id/mm"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
         <EditText
@@ -181,20 +181,19 @@
             android:textColor="@color/white"
             android:textColorHint="@color/grey"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
         <EditText
             android:id="@+id/yy"
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/grey"
             android:hint="YY"
             android:textColor="@color/white"
             android:textColorHint="@color/grey"
-            app:layout_constraintStart_toEndOf="@+id/emm"
+            app:layout_constraintStart_toEndOf="@+id/mm"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
 
