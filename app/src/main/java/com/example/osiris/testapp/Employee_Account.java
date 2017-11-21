@@ -22,7 +22,7 @@ public class Employee_Account extends AppCompatActivity {
 
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mToggle;
-    private EditText day, month , year, startHour, startMin, endHour, endMin;
+    private EditText day, month , year, startHour, startMin, endHour, endMin, day2,month2,year2;
     private Calendar calendar;
     private User currentUser;
     private String email, key;
@@ -34,14 +34,18 @@ public class Employee_Account extends AppCompatActivity {
 
         email = getIntent().getStringExtra("EMAIL");
 
-        day = (EditText) findViewById(R.id.day);
-        month = (EditText) findViewById(R.id.month);
-        year = (EditText) findViewById(R.id.year);
+        day = (EditText) findViewById(R.id.dd);
+        month = (EditText) findViewById(R.id.mm);
+        year = (EditText) findViewById(R.id.yy);
+
+        day2 = (EditText) findViewById(R.id.edd);
+        month2 = (EditText) findViewById(R.id.emm);
+        year2 = (EditText) findViewById(R.id.eyy);
 
         startHour = (EditText) findViewById(R.id.startHour);
         startMin = (EditText) findViewById(R.id.startMin);
-        endHour = (EditText) findViewById(R.id.startHour2);
-        endMin = (EditText) findViewById(R.id.startMin2);
+        endHour = (EditText) findViewById(R.id.endHour);
+        endMin = (EditText) findViewById(R.id.endMins);
 
         calendar = Calendar.getInstance();
 
@@ -49,13 +53,16 @@ public class Employee_Account extends AppCompatActivity {
         month.setText(String.valueOf(calendar.get(Calendar.MONTH)));
         year.setText(String.valueOf(calendar.get(Calendar.YEAR)));
 
+        day2.setText(String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
+        month2.setText(String.valueOf(calendar.get(Calendar.MONTH)));
+        year2.setText(String.valueOf(calendar.get(Calendar.YEAR)));
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawable_menu_employee_account);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.open, R.string.close);
 
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
@@ -104,6 +111,9 @@ public class Employee_Account extends AppCompatActivity {
         int dd = Integer.parseInt(day.getText().toString());
         int mm = Integer.parseInt(month.getText().toString());
         int yy = Integer.parseInt(year.getText().toString());
+        int dd2 = Integer.parseInt(day2.getText().toString());
+        int mm2 = Integer.parseInt(month2.getText().toString());
+        int yy2 = Integer.parseInt(year2.getText().toString());
         //Shift shift = new Shift(dd,mm,yy, Integer.parseInt(startHour.getText().toString()), Integer.parseInt(startMin.getText().toString()));
         Shift shift = new Shift();
         shift.setStartDateAndHour(dd,mm,yy, Integer.parseInt(startHour.getText().toString()), Integer.parseInt(startMin.getText().toString()));
@@ -114,11 +124,16 @@ public class Employee_Account extends AppCompatActivity {
         currentUser.addShift(shift);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference();
+        //DatabaseReference myRef = database.getReference();
+
 
         User user = currentUser;
 
-        myRef.child("Shifts").child(key).setValue(user);
+       // myRef.child("Shifts").setValue(shift);
+
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Shifts");
+        myRef.push();
+        myRef.child("Shifts").setValue(shift);
 
 
 

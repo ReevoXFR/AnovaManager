@@ -20,7 +20,7 @@ public class User implements Serializable {
     private Company partOf;
 
     public User(){
-
+        shifts = new ArrayList<Shift>();
     }
 
 
@@ -29,6 +29,7 @@ public class User implements Serializable {
 
         this.email = email;
         this.name = name;
+        shifts = new ArrayList<Shift>();
     }
 
     public void setName(String name)

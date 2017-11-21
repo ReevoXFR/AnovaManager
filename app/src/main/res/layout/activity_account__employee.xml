@@ -15,6 +15,11 @@
         android:layout_height="match_parent"
         android:background="@drawable/background_gradient">
 
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:onClick="addShift"/>
+
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
@@ -40,7 +45,7 @@
             app:layout_constraintTop_toBottomOf="@+id/dd" />
 
         <EditText
-            android:id="@+id/emm"
+            android:id="@+id/mm"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="84dp"
@@ -53,7 +58,7 @@
 
         <EditText
             android:id="@+id/eyy"
-            android:layout_width="40dp"
+            android:layout_width="70dp"
             android:layout_height="40dp"
             android:layout_marginTop="48dp"
             android:backgroundTint="@color/grey"
@@ -168,7 +173,7 @@
             app:layout_constraintTop_toBottomOf="@+id/endHour" />
 
         <EditText
-            android:id="@+id/mm"
+            android:id="@+id/emm"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="48dp"
@@ -177,11 +182,11 @@
             android:textColor="@color/white"
             android:textColorHint="@color/grey"
             app:layout_constraintStart_toEndOf="@+id/edd"
-            app:layout_constraintTop_toBottomOf="@+id/emm" />
+            app:layout_constraintTop_toBottomOf="@+id/mm" />
 
         <EditText
             android:id="@+id/yy"
-            android:layout_width="40dp"
+            android:layout_width="70dp"
             android:layout_height="40dp"
             android:layout_marginTop="84dp"
             android:backgroundTint="@color/grey"
