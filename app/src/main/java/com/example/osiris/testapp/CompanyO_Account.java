@@ -8,8 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,26 +31,46 @@ import java.util.List;
 public class CompanyO_Account extends AppCompatActivity {
     private User thisUser;
     private Button button;
+    private ListView listView;
+    private ArrayAdapter<String> arrayAdapter;
 
+    private ArrayList<String> list;
 
     private FirebaseAuth.AuthStateListener mAuthListener;
     private User currentUser;
     private TextView hasNoComp;
-    private TextView tv3;
+    //private TextView tv3;
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        button = (Button)findViewById(R.id.buttonGetUser);
-
-        mAuth = FirebaseAuth.getInstance();
-        mAuth.getCurrentUser().getUid();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employer__account);
-        tv3 = (TextView) findViewById(R.id.textView3);
+
+        listView = (ListView)findViewById(R.id.ListViewCompany);
+        list = new ArrayList<String>();
 
 
+
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+
+        listView.setAdapter(arrayAdapter);
+
+        button = (Button)findViewById(R.id.buttonGetUser);
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.getCurrentUser().getUid();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String email = (String) parent.getItemAtPosition(position);
+
+                Intent intent = new Intent(CompanyO_Account.this, checkEmployee.class);
+                intent.putExtra("EMAIL", email);
+                startActivity(intent);
+
+            }
+        });
         final String email = getIntent().getStringExtra("EMAIL");
 
         //   final ListView listView = (ListView) findViewById(R.id.listCont);
@@ -78,53 +101,7 @@ public class CompanyO_Account extends AppCompatActivity {
 
             }
         });
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-       // Log.d("ALOO", users.get(0).getEmail().toString());
-        //Log.d("FINALLY", thisUser.getEmail());
-
-
-       // final TextView tv = (TextView) findViewById(R.id.textViewCont);
-        //final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, employeeList);
-        //  listView.setAdapter(adapter);
-
         hasNoComp = (TextView) findViewById(R.id.textViewEmailCheck);
-        //String emailtest = thisUser.getEmail();
-        //Log.d("companies",emailtest);
-//        if (checkIfHasCompany() == false) {
-//            hasNoComp.setText("You have no company! Create one");
-//        } else {
-//            hasNoComp.setText("");
-//        }
-
-        // THIS METHOD HERE will help with adding employees using the key
-//        myRef.child("Employees").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-//                for (DataSnapshot child : children) {
-//                    String key = "-KyuI-bR1HZwfLA8NT_P";
-//
-//                    if (child.getKey().equals(key)) {
-//                        User user = child.getValue(User.class);
-//                        employeeList.add(user.getEmail());
-//                        tv.append(user.getName() + " \n");
-//                        tv.append(user.getEmail() + "\n");
-//                        tv.append(user.getKey() + "\n");
-//
-//                        adapter.notifyDataSetChanged();
-//                    }
-//
-//
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
 
         checkIfHasCompany();
         checkForEmployees();
@@ -162,10 +139,13 @@ public class CompanyO_Account extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 User user = dataSnapshot.getValue(User.class);
                 if(user == null){
-                    tv3.setText(" NO EMPLOYEES");
+                   // tv3.setText(" NO EMPLOYEES");
+
                     return;
                 }else{
-                    tv3.append(user.getName() + " ");
+                    list.add(user.getEmail());
+                    arrayAdapter.notifyDataSetChanged();
+                   // tv3.append(user.getName() + " ");
                 }
             }
 
