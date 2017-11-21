@@ -40,7 +40,7 @@ public class EmployeeCreate extends AppCompatActivity {
     }
 
     public void addEmployee(View view) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
 
 
@@ -52,7 +52,7 @@ public class EmployeeCreate extends AppCompatActivity {
         final String key = String.valueOf(et.getText());
 
 
-        myRef.child("Users");
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -65,9 +65,14 @@ public class EmployeeCreate extends AppCompatActivity {
                     User user = child.getValue(User.class);
 
                     if (user.getEmail().equals(String.valueOf(et.getText()))) {
+                        user.setCompanyOwner(mAuth.getCurrentUser().getUid());
+
+
+                        String id = user.getKey();
+                        DatabaseReference myRef = database.getReference();
+                        myRef.child("Users").child(id).setValue(user);
 
                         myRef2.push();
-                        String id = user.getKey();
                         myRef2.child(id).setValue(user);
 
                     }else{

@@ -140,10 +140,10 @@ public class Employee_Account extends AppCompatActivity {
 
 
         final String ownerKey = currentUser.getCompanyOwner();
-
+        Log.d("THE COMPANY OWNER", ownerKey.toString());
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef3 = database.getReference();
-        myRef3.child("Users").addValueEventListener(new ValueEventListener() {
+        myRef3.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
@@ -153,9 +153,10 @@ public class Employee_Account extends AppCompatActivity {
                     if (user.getKey().equals(ownerKey)) {
 
                         DatabaseReference myRef2 = FirebaseDatabase.getInstance().getReference().child("Users").child(ownerKey).child("COMPANY ID MAKE JUST ONE PLEASE").child("Employees").child(currentUser.getKey()).child("Shifts");
+
                         String id = myRef2.push().getKey();
                         myRef2.child(id).setValue(shift);
-                        Log.d("AAA","SSSSSS" );
+                       // Log.d("AAA", );
                         return;
 
                     }

@@ -75,8 +75,6 @@ public class AccountSettings extends AppCompatActivity {
         User user = currentUser;
         user.setName(changeName.getText().toString());
         myRef.child("Users").child(id).setValue(user);
-
-
     }
 
     public void changeEmail(View view) {
