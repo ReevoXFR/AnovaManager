@@ -21,6 +21,7 @@ public class User implements Serializable {
 
     public User(){
         shifts = new ArrayList<Shift>();
+        ownerOf = new ArrayList<Company>();
     }
 
 
