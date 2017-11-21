@@ -110,11 +110,13 @@ public class CompanyO_Login extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(!task.isSuccessful()){
                         Toast.makeText(CompanyO_Login.this, "Sign in problem", Toast.LENGTH_LONG).show();
+                        circularProgressButton.doneLoadingAnimation(Color.parseColor("#333693"), BitmapFactory.decodeResource(getResources(), R.drawable.ic_error));
                     }else{
                         if(!mAuth.getCurrentUser().isEmailVerified()) {
                             Toast.makeText(CompanyO_Login.this, "Email not verified", Toast.LENGTH_LONG).show();
                             //progressDialog.dismiss();
                             mAuth.signOut();
+                            circularProgressButton.doneLoadingAnimation(Color.parseColor("#333693"), BitmapFactory.decodeResource(getResources(), R.drawable.ic_error));
                             return;
                         }
                         Intent intent = (new Intent(CompanyO_Login.this, CompanyO_Account.class));
@@ -139,7 +141,7 @@ public class CompanyO_Login extends AppCompatActivity {
     public void loginCompanyO(View view){
         startSignIn();
         circularProgressButton.startAnimation();
-        circularProgressButton.doneLoadingAnimation(Color.parseColor("#333693"), BitmapFactory.decodeResource(getResources(), R.drawable.ic_done_white_48dp));
+
 
 
     }
