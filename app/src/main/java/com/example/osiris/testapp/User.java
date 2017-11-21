@@ -19,6 +19,7 @@ public class User implements Serializable {
     private ArrayList<Shift> shifts;
     private Company partOf;
 
+
     public User(){
         shifts = new ArrayList<Shift>();
         ownerOf = new ArrayList<Company>();

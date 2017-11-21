@@ -64,9 +64,11 @@ public class CompanyO_Account extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String email = (String) parent.getItemAtPosition(position);
+                String currentUserKey = mAuth.getCurrentUser().getUid();
 
                 Intent intent = new Intent(CompanyO_Account.this, checkEmployee.class);
                 intent.putExtra("EMAIL", email);
+                intent.putExtra("KEY", currentUserKey);
                 startActivity(intent);
 
             }
