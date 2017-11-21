@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -78,7 +79,7 @@ public class CompanyO_Account extends AppCompatActivity {
             }
         });
 
-        final TextView tv = (TextView) findViewById(R.id.textViewCont);
+       // final TextView tv = (TextView) findViewById(R.id.textViewCont);
         //final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, employeeList);
         //  listView.setAdapter(adapter);
 
@@ -120,15 +121,15 @@ public class CompanyO_Account extends AppCompatActivity {
 //            }
 //        });
 
-
+        checkIfHasCompany();
+        checkForEmployees();
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-      checkIfHasCompany();
-      checkForEmployees();
+
     }
 
 
@@ -152,15 +153,31 @@ public class CompanyO_Account extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("COMPANY ID MAKE JUST ONE PLEASE").child("Employees");
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 User user = dataSnapshot.getValue(User.class);
                 if(user == null){
-                    tv3.append(" NO EMPLOYEES");
+                    tv3.setText(" NO EMPLOYEES");
+                    return;
                 }else{
-                    tv3.append(user.getName());
+                    tv3.append(user.getName() + " ");
                 }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
@@ -168,6 +185,8 @@ public class CompanyO_Account extends AppCompatActivity {
 
             }
         });
+
+
     }
     public void checkIfHasCompany() {
         //not available from up there idk why
@@ -203,7 +222,7 @@ public class CompanyO_Account extends AppCompatActivity {
     }
 
 
-    public void goCreate(View view) {
+    public void goCreateCompany(View view) {
         Intent intent = new Intent(this, CompanyCreate.class);
         startActivity(intent);
     }
@@ -216,8 +235,8 @@ public class CompanyO_Account extends AppCompatActivity {
 
     }
 
-    public void addEmployee(View view) {
-        Intent intent = new Intent(this, CompanyCreate.class);
+    public void goCreateEmployee(View view) {
+        Intent intent = new Intent(this, EmployeeCreate.class);
         startActivity(intent);
     }
 }

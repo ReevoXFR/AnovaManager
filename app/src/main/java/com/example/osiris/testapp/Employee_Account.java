@@ -95,7 +95,7 @@ public class Employee_Account extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void accSettings(View view) {
+    public void accSettings(MenuItem item) {
         Intent intent = new Intent( this, AccountSettings.class);
         startActivity(intent);
     }
