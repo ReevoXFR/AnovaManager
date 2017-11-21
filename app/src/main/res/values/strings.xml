@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ANOVA Management</string>
+    <string name="app_name">ANOVA</string>
     <string name="Company_Owner_Intent">Company Owner</string>
     <string name="Employee_Intent">Employee</string>
     <string name="title_activity_login_employee">Sign in</string>
