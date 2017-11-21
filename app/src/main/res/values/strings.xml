@@ -20,5 +20,14 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."
 
     </string>
+    
+    <string-array name="parent_titles">
+        <item>First item</item>
+    </string-array>
+    <string-array name="child1_titles">
+        <item>vlad</item>
+        <item>vlad2</item>
+        <item>vlad3</item>
+    </string-array>
     <string name="createAccount_message">New user? Click here to create new account!</string>
 </resources>

@@ -94,13 +94,14 @@
         android:id="@+id/oldPasswordAccSettings"
         android:layout_width="wrap_content"
         android:layout_height="39dp"
-        android:layout_marginStart="92dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/white"
         android:hint="Enter old password"
         android:inputType="textPassword"
         android:textColor="@color/white"
         android:textColorHint="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordtv" />
 
@@ -108,13 +109,14 @@
         android:id="@+id/passwordAccSettings"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginStart="92dp"
         android:layout_marginTop="4dp"
         android:backgroundTint="@color/white"
         android:hint="Enter new password"
         android:inputType="textPassword"
         android:textColor="@color/white"
         android:textColorHint="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/oldPasswordAccSettings" />
 
