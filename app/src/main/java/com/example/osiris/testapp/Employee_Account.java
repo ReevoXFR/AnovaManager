@@ -28,6 +28,7 @@ public class Employee_Account extends AppCompatActivity {
     private User currentUser;
     private String email, key;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -171,6 +172,11 @@ public class Employee_Account extends AppCompatActivity {
 
 
 
+    }
+
+    public void seeShifts(View view) {
+        Intent intent = new Intent(this, seeShifts.class);
+        startActivity(intent);
     }
 }
 
