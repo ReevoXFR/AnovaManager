@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -119,11 +120,23 @@ public class Employee_Account extends AppCompatActivity {
 
     public void addShift(View view) {
         //check if the user is part of a company
-//        if(currentUser.getPartOf()==null) {
-//            Toast.makeText(Employee_Account.this, "You are not part of a company!", Toast.LENGTH_LONG).show();
-//            return;
-//        }
+        if(currentUser.getCompanyOwner()==null) {
+            Toast.makeText(Employee_Account.this, "You are not part of a company!", Toast.LENGTH_LONG).show();
+            return;
+        }
 
+
+        if(startHour.getText().toString().isEmpty() || startMin.getText().toString().isEmpty() || endHour.getText().toString().isEmpty() || endMin.getText().toString().isEmpty()) {
+            Toast.makeText(Employee_Account.this, "Please fill in time", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(day.getText().toString().isEmpty() || day2.getText().toString().isEmpty() || month.getText().toString().isEmpty() || month2.getText().toString().isEmpty() || year.getText().toString().isEmpty() || year2.getText().toString().isEmpty()) {
+            Toast.makeText(Employee_Account.this, "Please fill in the date", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        final Shift shift = new Shift();
 
         int dd = Integer.parseInt(day.getText().toString());
         int mm = Integer.parseInt(month.getText().toString());
@@ -132,55 +145,72 @@ public class Employee_Account extends AppCompatActivity {
         int mm2 = Integer.parseInt(month2.getText().toString());
         int yy2 = Integer.parseInt(year2.getText().toString());
 
-        final Shift shift = new Shift();
-
-        shift.setStartDateAndHour(dd,mm,yy, Integer.parseInt(startHour.getText().toString()), Integer.parseInt(startMin.getText().toString()));
+        int startH = Integer.parseInt(startHour.getText().toString());
+        int startM = Integer.parseInt(startMin.getText().toString());
         int endH = Integer.parseInt(endHour.getText().toString());
         int endM = Integer.parseInt(endMin.getText().toString());
-        shift.setEndDateAndHour(dd2,mm2,yy2, endH, endM );
-
-        shift.setUserKey(currentUser.getKey());
-
-        currentUser.addShift(shift);
-
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Shifts");
-        String id = myRef.push().getKey();
-        myRef.child(id).setValue(shift);
 
 
-        final String ownerKey = currentUser.getCompanyOwner();
-        Log.d("THE COMPANY OWNER", ownerKey.toString());
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef3 = database.getReference();
-        myRef3.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-                for (DataSnapshot child : children) {
-                    User user = child.getValue(User.class);
+        if(startH > 24 || startH<0 || endH > 24 || endH<0) {
+            Toast.makeText(Employee_Account.this, "Invalid hour", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(startM > 60 || startM<0 || endM > 60 || endM<0) {
+            Toast.makeText(Employee_Account.this, "Invalid minute", Toast.LENGTH_LONG).show();
+            return;
+        }
 
-                    if (user.getKey().equals(ownerKey)) {
+        Calendar now = Calendar.getInstance();
+        int year = now.get(Calendar.YEAR);
 
-                        DatabaseReference myRef2 = FirebaseDatabase.getInstance().getReference().child("Users").child(ownerKey).child("COMPANY ID MAKE JUST ONE PLEASE").child("Employees").child(currentUser.getKey()).child("Shifts");
 
-                        String id = myRef2.push().getKey();
-                        myRef2.child(id).setValue(shift);
-                       // Log.d("AAA", );
-                        return;
+        if(dd > 32 || dd < 1 || dd2 > 32 || dd2 < 1 || mm > 12 || mm < 1 || mm2 > 12 || mm2 < 1 || yy < year-1 || yy>year+1 || yy2 < year-1 || yy2>year+1) {
+            Toast.makeText(Employee_Account.this, "Invalid date", Toast.LENGTH_LONG).show();
+            return;
+        }
 
+                shift.setStartDateAndHour(dd, mm, yy, startH, startM);
+            shift.setEndDateAndHour(dd2, mm2, yy2, endH, endM);
+
+
+            shift.setUserKey(currentUser.getKey());
+
+            currentUser.addShift(shift);
+
+            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Shifts");
+            String id = myRef.push().getKey();
+            myRef.child(id).setValue(shift);
+
+
+            final String ownerKey = currentUser.getCompanyOwner();
+            Log.d("THE COMPANY OWNER", ownerKey.toString());
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef3 = database.getReference();
+            myRef3.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                    for (DataSnapshot child : children) {
+                        User user = child.getValue(User.class);
+
+                        if (user.getKey().equals(ownerKey)) {
+
+                            DatabaseReference myRef2 = FirebaseDatabase.getInstance().getReference().child("Users").child(ownerKey).child("COMPANY ID MAKE JUST ONE PLEASE").child("Employees").child(currentUser.getKey()).child("Shifts");
+
+                            String id = myRef2.push().getKey();
+                            myRef2.child(id).setValue(shift);
+                            return;
+
+                        }
                     }
                 }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
 
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+        }
 
-
-
-
-    }
 
     public void seeShifts(View view) {
         Intent intent = new Intent(this, SeeShifts2.class);
