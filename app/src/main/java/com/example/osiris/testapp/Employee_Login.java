@@ -111,9 +111,12 @@ public class Employee_Login extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (mAuth.getCurrentUser().isEmailVerified() == false) {
                         Toast.makeText(Employee_Login.this, "Email not verified", Toast.LENGTH_LONG).show();
+                        return;
                     }
                     if (!task.isSuccessful()) {
                         Toast.makeText(Employee_Login.this, "Sign in problem", Toast.LENGTH_LONG).show();
+                        circularProgressButton.stopAnimation();
+                        return;
                     } else {
 
                         circularProgressButton.doneLoadingAnimation(Color.parseColor("#333693"), BitmapFactory.decodeResource(getResources(), R.drawable.ic_done_white_48dp));
@@ -136,11 +139,8 @@ public class Employee_Login extends AppCompatActivity {
     }
 
     public void loginEmployee(View view){
-
         circularProgressButton.startAnimation();
         startSignIn();
-
-
     }
 
 
