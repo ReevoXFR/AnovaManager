@@ -148,7 +148,7 @@ public class Employee_Account extends AppCompatActivity {
                     User user = child.getValue(User.class);
                     if (user.getEmail().equals(email)) {
                         currentUser = user;
-                        key = child.getKey();
+                        //key = child.getKey();
                     }
                 }
             }
