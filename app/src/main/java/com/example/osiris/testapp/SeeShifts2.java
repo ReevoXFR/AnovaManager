@@ -29,6 +29,7 @@ public class SeeShifts2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_see_shifts);
 
+        String companyKey = getIntent().getStringExtra("companyKey");
         String ownerKey = getIntent().getStringExtra("ownerKey");
         String userKey = getIntent().getStringExtra("key");
 
@@ -43,7 +44,7 @@ public class SeeShifts2 extends AppCompatActivity {
         DatabaseReference myRef = database.getReference();
         Log.d("Check this", ownerKey + " " + userKey);
 
-        myRef.child("Users").child(ownerKey).child("COMPANY ID MAKE JUST ONE PLEASE").child("Employees").child(userKey).child("Shifts").addValueEventListener(new ValueEventListener() {
+        myRef.child("Users").child(ownerKey).child(companyKey).child("Employees").child(userKey).child("Shifts").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();

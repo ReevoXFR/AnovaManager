@@ -29,14 +29,20 @@
             android:name=".Employee_Login"
             android:label="@string/Employee_Intent" />
         <activity android:name=".checkEmployee"/>
-        <activity android:name=".SeeShifts2"/>
-        <activity android:name=".Employee_Account" />
+        <activity android:name=".SeeShifts2"
+            android:label="See Shifts"/>
+        <activity android:name=".Employee_Account"
+            android:label="Add a Shift"/>
         <activity android:name=".CreateUser" />
-        <activity android:name=".CompanyO_Account" />
+        <activity android:name=".CompanyO_Account"
+            android:label="Manage Employees"/>
         <activity android:name=".Reset_Password" />
-        <activity android:name=".AccountSettings" />
-        <activity android:name=".EmployeeCreate"/>
-        <activity android:name=".CompanyCreate">
+        <activity android:name=".AccountSettings"
+            android:label="Account Settings"/>
+        <activity android:name=".EmployeeCreate"
+            android:label="Add Employee"/>
+        <activity android:name=".CompanyCreate"
+            android:label="Create a company">
         </activity>
     </application>
 

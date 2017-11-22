@@ -195,7 +195,7 @@ public class Employee_Account extends AppCompatActivity {
 
                         if (user.getKey().equals(ownerKey)) {
 
-                            DatabaseReference myRef2 = FirebaseDatabase.getInstance().getReference().child("Users").child(ownerKey).child("COMPANY ID MAKE JUST ONE PLEASE").child("Employees").child(currentUser.getKey()).child("Shifts");
+                            DatabaseReference myRef2 = FirebaseDatabase.getInstance().getReference().child("Users").child(ownerKey).child(currentUser.getPartOf()).child("Employees").child(currentUser.getKey()).child("Shifts");
 
                             String id = myRef2.push().getKey();
                             myRef2.child(id).setValue(shift);
@@ -216,6 +216,7 @@ public class Employee_Account extends AppCompatActivity {
         Intent intent = new Intent(this, SeeShifts2.class);
         intent.putExtra("key", mAuth.getCurrentUser().getUid());
         intent.putExtra("ownerKey", currentUser.getCompanyOwner());
+        intent.putExtra("companyKey", currentUser.getPartOf());
         startActivity(intent);
     }
 }

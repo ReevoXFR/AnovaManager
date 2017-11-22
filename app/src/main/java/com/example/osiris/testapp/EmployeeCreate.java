@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -41,19 +42,19 @@ public class EmployeeCreate extends AppCompatActivity {
 
     public void addEmployee(View view) {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference();
+        final DatabaseReference myRef = database.getReference().child("Users");
 
-
+        final String id = getIntent().getStringExtra("companyKey");
 
 
         final EditText et = (EditText) findViewById(R.id.editFieldAddEmployee);
-        myRef = database.getReference().child("Users");
-        myRef2 = database.getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("COMPANY ID MAKE JUST ONE PLEASE").child("Employees");
+
+        myRef2 = database.getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child(id).child("Employees");
         final String key = String.valueOf(et.getText());
 
 
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
@@ -66,19 +67,22 @@ public class EmployeeCreate extends AppCompatActivity {
 
                     if (user.getEmail().equals(String.valueOf(et.getText()))) {
                         user.setCompanyOwner(mAuth.getCurrentUser().getUid());
+                        user.employTo(id);
+                        myRef.child(user.getKey()).setValue(user);
 
-
-                        String id = user.getKey();
+                        String id2 = user.getKey();
                         DatabaseReference myRef = database.getReference();
-                        myRef.child("Users").child(id).setValue(user);
+                        myRef.child("Users").child(id2).setValue(user);
 
                         myRef2.push();
-                        myRef2.child(id).setValue(user);
+                        myRef2.child(id2).setValue(user);
+                        Toast.makeText(EmployeeCreate.this, "User added!", Toast.LENGTH_LONG).show();
+                        Log.d("Look here", "Anotherone");
+                        return;
 
-                    }else{
-                        Log.d("No such User", "No such user!");
                     }
                 }
+                Toast.makeText(EmployeeCreate.this, "No such user!", Toast.LENGTH_LONG).show();
 
             }
 

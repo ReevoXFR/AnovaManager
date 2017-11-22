@@ -29,25 +29,23 @@ public class CompanyCreate extends AppCompatActivity {
 
 
         button = (Button)findViewById(R.id.buttonCompanyCreate);
-
-
-
     }
 
     public void saveCompany(View view) {
-        myRef.push();
-        String id = "COMPANY ID MAKE JUST ONE PLEASE";
+
+        String id = myRef.push().getKey();
 
         EditText et = (EditText) findViewById(R.id.editFieldCompanyCreate);
         User user = (User) getIntent().getSerializableExtra("theOwner");
-        Company company = new Company(et.getText().toString(), user);
+        user.setCompanyKey(id);
+        user.setCompanyName(et.getText().toString());
+        myRef.setValue(user);
+        Company company = new Company(et.getText().toString(), user.getKey());
         myRef.child(id).setValue(company);
-       // Log.d("Company check", company.getName() + " NAME" + company.getOwner().getEmail() + " OWNER");
+
         Intent intent = new Intent(this, CompanyO_Account.class);
-        //intent.putExtra("MyCompany", company);
-
-
-
+        intent.putExtra("companyKey", id);
+        intent.putExtra("companyName", et.getText().toString());
 
         finish();
         startActivity(intent);

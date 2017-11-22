@@ -33,6 +33,7 @@ public class CompanyO_Account extends AppCompatActivity {
     private Button button;
     private ListView listView;
     private ArrayAdapter<String> arrayAdapter;
+    private String companyKey;
 
     private ArrayList<String> list;
 
@@ -60,13 +61,17 @@ public class CompanyO_Account extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mAuth.getCurrentUser().getUid();
 
+
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                companyKey = currentUser.getCompanyKey();
                 String email = (String) parent.getItemAtPosition(position);
                 String currentUserKey = mAuth.getCurrentUser().getUid();
 
                 Intent intent = new Intent(CompanyO_Account.this, checkEmployee.class);
+                intent.putExtra("companyKey", companyKey);
                 intent.putExtra("EMAIL", email);
                 intent.putExtra("KEY", currentUserKey);
                 startActivity(intent);
@@ -84,16 +89,16 @@ public class CompanyO_Account extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-            DataSnapshot ds;
+
 
                 for (DataSnapshot child : children) {
 
-                    //User user = new User(dataSnapshot.child("name").getValue(String.class), dataSnapshot.child("email").getValue(String.class));
                     User user = child.getValue(User.class);
 
                     if (user.getEmail().equals(email)) {
                         currentUser = user;
-                        Log.d("THIS TAG NOW", currentUser.getEmail());
+                        checkForEmployees();
+                        checkIfHasCompany();
                     }
                 }
             }
@@ -104,16 +109,12 @@ public class CompanyO_Account extends AppCompatActivity {
             }
         });
         hasNoComp = (TextView) findViewById(R.id.textViewEmailCheck);
-
-        checkIfHasCompany();
-        checkForEmployees();
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
 
@@ -133,21 +134,23 @@ public class CompanyO_Account extends AppCompatActivity {
     }
 
     public void checkForEmployees(){
+        arrayAdapter.clear();
+        String compId = currentUser.getCompanyKey();
+        if(compId == null){
+            return;
+        }
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("COMPANY ID MAKE JUST ONE PLEASE").child("Employees");
+        DatabaseReference myRef = database.getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child(compId).child("Employees");
 
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 User user = dataSnapshot.getValue(User.class);
                 if(user == null){
-                   // tv3.setText(" NO EMPLOYEES");
-
                     return;
                 }else{
                     list.add(user.getEmail());
                     arrayAdapter.notifyDataSetChanged();
-                   // tv3.append(user.getName() + " ");
                 }
             }
 
@@ -175,30 +178,14 @@ public class CompanyO_Account extends AppCompatActivity {
 
     }
     public void checkIfHasCompany() {
-        //not available from up there idk why
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("COMPANY ID MAKE JUST ONE PLEASE");
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Company comp = dataSnapshot.getValue(Company.class);
-                if (comp == null) {
-                    hasNoComp.setText("You have no company");
-                } else {
-                    hasNoComp.setText("You have the company: " + comp.getName());
-                }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
+        String companyName = currentUser.getCompanyName();
 
-//        Toast.makeText(this, "lala", Toast.LENGTH_SHORT).show();
-//        myRef.child("Employees").child(mAuth.getCurrentUser().getUid()).child("")
-
-
+        if (companyName == null) {
+            hasNoComp.setText("You have no company");
+        } else {
+           hasNoComp.setText("You have the company: " + companyName);
+        }
     }
 
     public User saveUser(User user) {
@@ -210,19 +197,18 @@ public class CompanyO_Account extends AppCompatActivity {
 
     public void goCreateCompany(View view) {
         Intent intent = new Intent(this, CompanyCreate.class);
+        intent.putExtra("theOwner", currentUser);
         startActivity(intent);
     }
 
 
     public void getUser(View view) {
-        Log.d("THIS TAG", currentUser.getEmail());
-       // Log.d("THIS TAG", currentUser);
-
 
     }
 
     public void goCreateEmployee(View view) {
         Intent intent = new Intent(this, EmployeeCreate.class);
+        intent.putExtra("companyKey", currentUser.getCompanyKey());
         startActivity(intent);
     }
 }

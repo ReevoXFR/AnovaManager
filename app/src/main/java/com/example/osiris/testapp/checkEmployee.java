@@ -48,8 +48,11 @@ public class checkEmployee extends AppCompatActivity {
 
     public void checkForEmployees(){
         String key = getIntent().getStringExtra("KEY");
+        String id = getIntent().getStringExtra("companyKey");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference().child("Users").child(key).child("COMPANY ID MAKE JUST ONE PLEASE").child("Employees");
+        DatabaseReference myRef = database.getReference().child("Users").child(key).child(id).child("Employees");
+
+
 
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
@@ -57,7 +60,8 @@ public class checkEmployee extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 if (user.getEmail().equals(getIntent().getStringExtra("EMAIL"))){
                     for (int i = 0;i<user.getShifts().size();i++){
-                        //shifts.add(user.getShifts().get(i).toString());
+                        shifts.add(user.getShifts().get(i).toString());
+
                     }
                     arrayAdapter.notifyDataSetChanged();
                 }

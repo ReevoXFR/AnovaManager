@@ -17,15 +17,22 @@ public class User implements Serializable {
     private String email, name, key, companyOwner;
     private ArrayList<Company> ownerOf;
     private ArrayList<Shift> shifts;
-    private Company partOf;
-
+    private String partOf;
+    private String companyKey;
+    private String companyName;
 
     public User(){
         shifts = new ArrayList<Shift>();
         ownerOf = new ArrayList<Company>();
     }
 
+    public String getCompanyName() {
+        return companyName;
+    }
 
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
 
     public User(String name, String email){  // in createUser se creeaza user care se baga in firebase
 
@@ -46,6 +53,8 @@ public class User implements Serializable {
 
         return name;
     }
+    public void setCompanyKey(String key){this.companyKey = key;}
+    public String getCompanyKey(){return companyKey;}
 
     public String getEmail(){
         return email;
@@ -67,11 +76,11 @@ public class User implements Serializable {
         return ownerOf;
     }
 
-    public void employTo(Company company) {
-        partOf=company;
+    public void employTo(String companyKey) {
+        this.partOf=companyKey;
     }
 
-    public Company getPartOf() {
+    public String getPartOf() {
         return partOf;
     }
 

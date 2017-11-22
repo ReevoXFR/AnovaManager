@@ -10,12 +10,12 @@ import java.util.ArrayList;
 public class Company implements Serializable {
 
     private ArrayList<User> employees;
-    private User owner;
+    private String ownerKey;
     private String key, name;
 
-    public Company(String name, User owner) {
+    public Company(String name, String ownerKey) {
         this.name = name;
-        this.owner = owner;
+        this.ownerKey = ownerKey;
         employees = new ArrayList<>();
 
     }
@@ -23,16 +23,16 @@ public class Company implements Serializable {
 
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setOwnerKey(User owner) {
+        this.ownerKey = ownerKey;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public User getOwner() {
-        return owner;
+    public String getOwner() {
+        return ownerKey;
     }
 
     public String getName() {
