@@ -59,7 +59,7 @@ public class checkEmployee extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 if (user.getEmail().equals(getIntent().getStringExtra("EMAIL"))) {
                     employeeKey = user.getKey();
-                    DatabaseReference myRef2 = database.getReference().child("Users").child(key).child(id).child("Employees").child(employeeKey).child("Shifts");
+                    DatabaseReference myRef2 = database.getReference().child("Users").child(key).child(id).child("Employees").child(employeeKey).child("shifts");
                     myRef2.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {

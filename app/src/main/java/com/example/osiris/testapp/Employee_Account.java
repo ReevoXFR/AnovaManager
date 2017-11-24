@@ -197,30 +197,29 @@ public class Employee_Account extends AppCompatActivity {
             Log.d("THE COMPANY OWNER", ownerKey.toString());
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef3 = database.getReference();
-            myRef3.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-                    for (DataSnapshot child : children) {
-                        User user = child.getValue(User.class);
+        myRef3.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                for (DataSnapshot child : children) {
+                    User user = child.getValue(User.class);
 
-                        if (user.getKey().equals(ownerKey)) {
+                    if (user.getKey().equals(ownerKey)) {
+                        DatabaseReference myRef2 = FirebaseDatabase.getInstance().getReference().child("Users").child(ownerKey).child(currentUser.getPartOf()).child("Employees").child(currentUser.getKey()).child("Shifts");
+                        String id = myRef2.push().getKey();
+                        myRef2.child(id).setValue(shift);
+                        return;
 
-                            DatabaseReference myRef2 = FirebaseDatabase.getInstance().getReference().child("Users").child(ownerKey).child(currentUser.getPartOf()).child("Employees").child(currentUser.getKey());
-
-
-                            myRef2.setValue(currentUser);
-                            return;
-
-                        }
                     }
                 }
+            }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                }
-            });
-        }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
 
 
     public void seeShifts(View view) {
