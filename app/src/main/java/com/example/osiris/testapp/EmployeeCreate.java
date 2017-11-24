@@ -30,6 +30,7 @@ public class EmployeeCreate extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_add);
+        getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
 
 

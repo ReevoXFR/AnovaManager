@@ -34,6 +34,8 @@ public class AccountSettings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_settings);
 
+        getSupportActionBar().hide();
+
         mAuth = FirebaseAuth.getInstance();
         changeEmail = (EditText) findViewById(R.id.changeEmail);
         pass = (EditText) findViewById(R.id.passwordAccSettings);

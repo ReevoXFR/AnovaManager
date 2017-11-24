@@ -28,6 +28,7 @@ public class SeeShifts2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_see_shifts);
+        getSupportActionBar().hide();
 
         String companyKey = getIntent().getStringExtra("companyKey");
         String ownerKey = getIntent().getStringExtra("ownerKey");

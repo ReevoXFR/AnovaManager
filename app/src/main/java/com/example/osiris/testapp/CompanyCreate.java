@@ -24,6 +24,7 @@ public class CompanyCreate extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_company_create);
         myRef = database.getReference().child("Users").child(mAuth.getCurrentUser().getUid());
 

@@ -47,6 +47,7 @@ public class CompanyO_Account extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employer__account);
+        getSupportActionBar().hide();
 
         listView = (ListView)findViewById(R.id.ListViewCompany);
         list = new ArrayList<String>();
@@ -211,4 +212,5 @@ public class CompanyO_Account extends AppCompatActivity {
         intent.putExtra("companyKey", currentUser.getCompanyKey());
         startActivity(intent);
     }
+
 }

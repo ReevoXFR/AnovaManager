@@ -26,6 +26,8 @@ public class CreateUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
+        getSupportActionBar().hide();
+
         mAuth = FirebaseAuth.getInstance();
 
         emailTx = (EditText) findViewById(R.id.emailCreateUser);

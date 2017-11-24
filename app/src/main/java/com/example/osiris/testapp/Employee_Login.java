@@ -39,6 +39,7 @@ public class Employee_Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee__login);
+        getSupportActionBar().hide();
 
        circularProgressButton = (CircularProgressButton) findViewById(R.id.buttonLoginID);
 

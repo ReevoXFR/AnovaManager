@@ -34,6 +34,7 @@ public class checkEmployee extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_employee);
+        getSupportActionBar().hide();
         listView = (ListView) findViewById(R.id.shiftListView);
 
         shifts = new ArrayList<>();
