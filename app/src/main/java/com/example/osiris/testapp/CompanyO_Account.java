@@ -59,7 +59,7 @@ public class CompanyO_Account extends AppCompatActivity {
 
         listView.setAdapter(arrayAdapter);
 
-        button = (Button)findViewById(R.id.buttonGetUser);
+       // button = (Button)findViewById(R.id.buttonGetUser);
         mAuth = FirebaseAuth.getInstance();
         mAuth.getCurrentUser().getUid();
 
