@@ -5,8 +5,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -42,8 +44,6 @@ public class checkEmployee extends AppCompatActivity {
         listView.setAdapter(arrayAdapter);
 
         checkForEmployees();
-
-
     }
 
     public void checkForEmployees() {
@@ -59,7 +59,7 @@ public class checkEmployee extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 if (user.getEmail().equals(getIntent().getStringExtra("EMAIL"))) {
                     employeeKey = user.getKey();
-                    DatabaseReference myRef2 = database.getReference().child("Users").child(key).child(id).child("Employees").child(employeeKey).child("shifts");
+                    DatabaseReference myRef2 = database.getReference().child("Users").child(key).child(id).child("Employees").child(employeeKey).child("Shifts");
                     myRef2.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -100,6 +100,16 @@ public class checkEmployee extends AppCompatActivity {
             }
         });
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView parent, View v, int position, long id){
+               // Toast.makeText(checkEmployee.this, String.valueOf(position), Toast.LENGTH_LONG).show();
+
+
+
+
+            }
+        });
+
 //        myRef.addValueEventListener(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(DataSnapshot dataSnapshot) {
@@ -124,6 +134,7 @@ public class checkEmployee extends AppCompatActivity {
 //
 //        });
     }
+
 
 
 //    public void checkForEmployees2() {

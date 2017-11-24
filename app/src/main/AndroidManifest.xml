@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -28,22 +28,28 @@
         <activity
             android:name=".Employee_Login"
             android:label="@string/Employee_Intent" />
-        <activity android:name=".checkEmployee"/>
-        <activity android:name=".SeeShifts2"
-            android:label="See Shifts"/>
-        <activity android:name=".Employee_Account"
-            android:label="Add a Shift"/>
+        <activity android:name=".checkEmployee" />
+        <activity
+            android:name=".SeeShifts2"
+            android:label="See Shifts" />
+        <activity
+            android:name=".Employee_Account"
+            android:label="Add a Shift" />
         <activity android:name=".CreateUser" />
-        <activity android:name=".CompanyO_Account"
-            android:label="Manage Employees"/>
+        <activity
+            android:name=".CompanyO_Account"
+            android:label="Manage Employees" />
         <activity android:name=".Reset_Password" />
-        <activity android:name=".AccountSettings"
-            android:label="Account Settings"/>
-        <activity android:name=".EmployeeCreate"
-            android:label="Add Employee"/>
-        <activity android:name=".CompanyCreate"
-            android:label="Create a company">
-        </activity>
+        <activity
+            android:name=".AccountSettings"
+            android:label="Account Settings" />
+        <activity
+            android:name=".EmployeeCreate"
+            android:label="Add Employee" />
+        <activity
+            android:name=".CompanyCreate"
+            android:label="Create a company"></activity>
+        <activity android:name=".ShiftSettings"></activity>
     </application>
 
 </manifest>

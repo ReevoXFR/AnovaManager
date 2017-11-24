@@ -122,6 +122,7 @@ public class Employee_Account extends AppCompatActivity {
 
     public void accSettings(MenuItem item) {
         Intent intent = new Intent( this, AccountSettings.class);
+        intent.putExtra("EMAIL", email);
         startActivity(intent);
     }
 

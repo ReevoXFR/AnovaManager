@@ -5,8 +5,8 @@
     <string name="title_activity_login_employee">Sign in</string>
 
     <!-- Strings related to Employee Drawer Menu -->
-    <string name ="open">Open</string>
-    <string name ="close">Close</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -20,7 +20,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."
 
     </string>
-    
+
     <string-array name="parent_titles">
         <item>First item</item>
     </string-array>

@@ -4,9 +4,11 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient">
 
-<ListView
-    android:id="@+id/shiftListView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-</ListView>
+    <ListView
+        android:id="@+id/shiftListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
+
+
 </android.support.constraint.ConstraintLayout>
