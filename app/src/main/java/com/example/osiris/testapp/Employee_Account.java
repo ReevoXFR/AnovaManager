@@ -98,7 +98,14 @@ public class Employee_Account extends AppCompatActivity {
         });
 
     }
-//
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        seeShiftsButton.setVisibility(View.GONE);
+    }
+
+    //
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -177,8 +184,12 @@ public class Employee_Account extends AppCompatActivity {
 
             currentUser.addShift(shift);
 
+            DatabaseReference myRef2 = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getKey());
+
+            myRef2.setValue(currentUser);
+
             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Shifts");
-            String id = myRef.push().getKey();
+            final String id = myRef.push().getKey();
             myRef.child(id).setValue(shift);
 
 
@@ -195,10 +206,10 @@ public class Employee_Account extends AppCompatActivity {
 
                         if (user.getKey().equals(ownerKey)) {
 
-                            DatabaseReference myRef2 = FirebaseDatabase.getInstance().getReference().child("Users").child(ownerKey).child(currentUser.getPartOf()).child("Employees").child(currentUser.getKey()).child("Shifts");
+                            DatabaseReference myRef2 = FirebaseDatabase.getInstance().getReference().child("Users").child(ownerKey).child(currentUser.getPartOf()).child("Employees").child(currentUser.getKey());
 
-                            String id = myRef2.push().getKey();
-                            myRef2.child(id).setValue(shift);
+
+                            myRef2.setValue(currentUser);
                             return;
 
                         }

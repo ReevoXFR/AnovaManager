@@ -41,17 +41,14 @@ public class checkEmployee extends AppCompatActivity {
         listView.setAdapter(arrayAdapter);
 
         checkForEmployees();
-        checkForEmployees2();
-
-        Log.d("AAAA", String.valueOf(shifts.size()));
 
 
     }
 
     public void checkForEmployees() {
-        String key = getIntent().getStringExtra("KEY");
-        String id = getIntent().getStringExtra("companyKey");
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final String key = getIntent().getStringExtra("KEY");
+        final String id = getIntent().getStringExtra("companyKey");
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference().child("Users").child(key).child(id).child("Employees");
 
 
@@ -61,6 +58,23 @@ public class checkEmployee extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 if (user.getEmail().equals(getIntent().getStringExtra("EMAIL"))) {
                     employeeKey = user.getKey();
+                    DatabaseReference myRef2 = database.getReference().child("Users").child(key).child(id).child("Employees").child(employeeKey).child("Shifts");
+                    myRef2.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                            for (DataSnapshot child : children) {
+                                Shift shift = child.getValue(Shift.class);
+                                shifts.add(shift.toString());
+                                arrayAdapter.notifyDataSetChanged();
+                            }
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+
+                    });
                 }
             }
 
@@ -85,56 +99,56 @@ public class checkEmployee extends AppCompatActivity {
             }
         });
 
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-                Log.d("BBBB", "BBBBB");
-                for (DataSnapshot child : children) {
+//        myRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+//                Log.d("BBBB", "BBBBB");
+//                for (DataSnapshot child : children) {
+////                    Shift shift = child.getValue(Shift.class);
+////                    shifts.add(shift.toString());
+////                    Log.d("CCC", "CCC");
+////                    arrayAdapter.notifyDataSetChanged();
+//                    User user = dataSnapshot.getValue(User.class);
+//                    if (user.getEmail().equals(getIntent().getStringExtra("EMAIL"))) {
+//                        employeeKey = user.getKey();
+//                    }
+//
+//                }
+//            }
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//
+//        });
+    }
+
+
+//    public void checkForEmployees2() {
+//        String key = getIntent().getStringExtra("KEY");
+//        String id = getIntent().getStringExtra("companyKey");
+//
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef2 = database.getReference().child("Users").child(key).child(id).child("Employees").child(employeeKey).child("Shifts");
+//        myRef2.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+//                Log.d("BBBB", "BBBBB");
+//                for (DataSnapshot child : children) {
 //                    Shift shift = child.getValue(Shift.class);
-//                    shifts.add(shift.toString());
+//                   shifts.add(shift.toString());
 //                    Log.d("CCC", "CCC");
 //                    arrayAdapter.notifyDataSetChanged();
-                    User user = dataSnapshot.getValue(User.class);
-                    if (user.getEmail().equals(getIntent().getStringExtra("EMAIL"))) {
-                        employeeKey = user.getKey();
-                    }
-
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-
-        });
-    }
-
-
-    public void checkForEmployees2() {
-        String key = getIntent().getStringExtra("KEY");
-        String id = getIntent().getStringExtra("companyKey");
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef2 = database.getReference().child("Users").child(key).child(id).child("Employees").child(employeeKey).child("Shifts");
-        myRef2.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-                Log.d("BBBB", "BBBBB");
-                for (DataSnapshot child : children) {
-                    Shift shift = child.getValue(Shift.class);
-                   shifts.add(shift.toString());
-                    Log.d("CCC", "CCC");
-                    arrayAdapter.notifyDataSetChanged();
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-
-        });
-
-    }
+//                }
+//            }
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//
+//        });
+//
+//    }
 }
