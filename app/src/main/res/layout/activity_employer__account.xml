@@ -36,7 +36,8 @@
         android:layout_width="165dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Manage Employees"
+        android:onClick="refresh"
+        android:text="Refresh"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings" />
 
@@ -46,21 +47,11 @@
         android:layout_width="165dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         android:onClick="accSettings"
         android:text="Account settings"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <Button
-        android:id="@+id/buttonGetUser"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="165dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:onClick="getUser"
-        android:text="Get User"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/employees" />
 
     <Button
         android:id="@+id/button3"
@@ -83,5 +74,5 @@
         android:onClick="goCreateEmployee"
         android:text="Add Employee"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonGetUser" />
+        app:layout_constraintTop_toBottomOf="@+id/employees" />
 </android.support.constraint.ConstraintLayout>

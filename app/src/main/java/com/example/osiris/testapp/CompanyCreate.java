@@ -44,12 +44,13 @@ public class CompanyCreate extends AppCompatActivity {
         Company company = new Company(et.getText().toString(), user.getKey());
         myRef.child(id).setValue(company);
 
-        Intent intent = new Intent(this, CompanyO_Account.class);
-        intent.putExtra("companyKey", id);
-        intent.putExtra("companyName", et.getText().toString());
-
+//        Intent intent = new Intent(this, CompanyO_Account.class);
+//        intent.putExtra("companyKey", id);
+//        intent.putExtra("companyName", et.getText().toString());
+//        startActivity(intent);
+//
         finish();
-        startActivity(intent);
+
 //    }
 
 

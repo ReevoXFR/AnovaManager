@@ -95,6 +95,7 @@ public class CompanyO_Account extends AppCompatActivity {
                     User user = child.getValue(User.class);
                     if (user.getEmail().equals(email2)) {
                         currentUser = user;
+                        arrayAdapter.clear();
                         checkForEmployees();
                         checkIfHasCompany();
                         Log.d("AAAAAAAAAAA", user.getEmail());
@@ -212,4 +213,10 @@ public class CompanyO_Account extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void refresh(View view) {
+        Intent intent = getIntent();
+        startActivity(intent);
+        finish();
+
+    }
 }

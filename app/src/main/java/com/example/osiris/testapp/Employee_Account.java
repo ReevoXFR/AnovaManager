@@ -195,6 +195,7 @@ public class Employee_Account extends AppCompatActivity {
 
 
             final String ownerKey = currentUser.getCompanyOwner();
+
             Log.d("THE COMPANY OWNER", ownerKey.toString());
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef3 = database.getReference();

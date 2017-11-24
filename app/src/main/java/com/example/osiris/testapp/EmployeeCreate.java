@@ -1,5 +1,6 @@
 package com.example.osiris.testapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -67,6 +68,10 @@ public class EmployeeCreate extends AppCompatActivity {
                     User user = child.getValue(User.class);
 
                     if (user.getEmail().equals(String.valueOf(et.getText()))) {
+                        if(user.getCompanyOwner()!= null){
+                            Toast.makeText(EmployeeCreate.this, "This user is already part of a company!", Toast.LENGTH_LONG).show();
+                            return;
+                        }
                         user.setCompanyOwner(mAuth.getCurrentUser().getUid());
                         user.employTo(id);
                         myRef.child(user.getKey()).setValue(user);
@@ -79,6 +84,7 @@ public class EmployeeCreate extends AppCompatActivity {
                         myRef2.child(id2).setValue(user);
                         Toast.makeText(EmployeeCreate.this, "User added!", Toast.LENGTH_LONG).show();
                         Log.d("Look here", "Anotherone");
+                        finish();
                         return;
 
                     }
@@ -95,9 +101,9 @@ public class EmployeeCreate extends AppCompatActivity {
         });
 
 
-        // Log.d("Company check", company.getName() + " NAME" + company.getOwner().getEmail() + " OWNER");
+//       //  Log.d("Company check", company.getName() + " NAME" + company.getOwner().getEmail() + " OWNER");
 //        Intent intent = new Intent(this, CompanyO_Account.class);
-//        //intent.putExtra("MyCompany", company);
+//       // intent.putExtra("MyCompany", company);
 //        finish();
 //        startActivity(intent);
 
