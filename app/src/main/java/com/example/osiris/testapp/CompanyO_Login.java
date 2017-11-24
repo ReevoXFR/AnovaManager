@@ -112,12 +112,14 @@ public class CompanyO_Login extends AppCompatActivity {
                     if(!task.isSuccessful()){
                         Toast.makeText(CompanyO_Login.this, "Sign in problem", Toast.LENGTH_LONG).show();
                         circularProgressButton.doneLoadingAnimation(Color.parseColor("#333693"), BitmapFactory.decodeResource(getResources(), R.drawable.ic_error));
+                        circularProgressButton.revertAnimation();
                     }else{
                         if(!mAuth.getCurrentUser().isEmailVerified()) {
                             Toast.makeText(CompanyO_Login.this, "Email not verified", Toast.LENGTH_LONG).show();
                             //progressDialog.dismiss();
                             mAuth.signOut();
                             circularProgressButton.doneLoadingAnimation(Color.parseColor("#333693"), BitmapFactory.decodeResource(getResources(), R.drawable.ic_error));
+                            circularProgressButton.revertAnimation();
                             return;
                         }
                         Intent intent = (new Intent(CompanyO_Login.this, CompanyO_Account.class));

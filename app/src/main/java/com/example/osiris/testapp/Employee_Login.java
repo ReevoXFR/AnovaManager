@@ -114,16 +114,18 @@ public class Employee_Login extends AppCompatActivity {
                     if (mAuth.getCurrentUser().isEmailVerified() == false) {
                         Toast.makeText(Employee_Login.this, "Email not verified", Toast.LENGTH_LONG).show();
                         circularProgressButton.doneLoadingAnimation(Color.parseColor("#333693"), BitmapFactory.decodeResource(getResources(), R.drawable.ic_error));
+                        circularProgressButton.revertAnimation();
                         return;
                     }
                     if (!task.isSuccessful()) {
                         Toast.makeText(Employee_Login.this, "Sign in problem", Toast.LENGTH_LONG).show();
                         circularProgressButton.doneLoadingAnimation(Color.parseColor("#333693"), BitmapFactory.decodeResource(getResources(), R.drawable.ic_error));
-                        circularProgressButton.stopAnimation();
+                        circularProgressButton.revertAnimation();
                         return;
                     } else {
 
                         circularProgressButton.doneLoadingAnimation(Color.parseColor("#333693"), BitmapFactory.decodeResource(getResources(), R.drawable.ic_done_white_48dp));
+                        circularProgressButton.revertAnimation();
                         Intent intent = new Intent(Employee_Login.this, Employee_Account.class);
                         intent.putExtra("EMAIL", email);
                         startActivity(intent);
