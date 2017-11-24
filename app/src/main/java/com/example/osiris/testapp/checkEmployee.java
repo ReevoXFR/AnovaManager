@@ -140,31 +140,33 @@ public class checkEmployee extends AppCompatActivity {
 
     public void removeEmployee(View view) {
 
-        final String key = getIntent().getStringExtra("KEY");
-        final String id = getIntent().getStringExtra("companyKey");
+        Toast.makeText(checkEmployee.this, "Not implemented yet", Toast.LENGTH_LONG).show();
 
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef = database.getReference().child("Users");
-        final String email = getIntent().getStringExtra("EMAIL");
-
-        myRef.child("Users").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-                for (DataSnapshot child : children) {
-                    User user = child.getValue(User.class);
-                    if (user.getEmail().equals(email)) {
-                        Log.d("AAAAAAAAAAA", user.getEmail());
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+//        final String key = getIntent().getStringExtra("KEY");
+//        final String id = getIntent().getStringExtra("companyKey");
+//
+//        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        final DatabaseReference myRef = database.getReference().child("Users");
+//        final String email = getIntent().getStringExtra("EMAIL");
+//
+//        myRef.child("Users").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+//                for (DataSnapshot child : children) {
+//                    User user = child.getValue(User.class);
+//                    if (user.getEmail().equals(email)) {
+//                        Log.d("AAAAAAAAAAA", user.getEmail());
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//
 
     }
 
