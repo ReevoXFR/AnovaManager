@@ -18,7 +18,7 @@
             android:id="@+id/textViewEmailCheck"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text=""
             android:textAlignment="center"/>
 
         <ListView
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/createCompanyButton"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="165dp"
         android:layout_height="46dp"
@@ -67,8 +67,7 @@
     <Button
         android:id="@+id/buttonAddEmployee"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="165dp
-"
+        android:layout_width="165dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:onClick="goCreateEmployee"

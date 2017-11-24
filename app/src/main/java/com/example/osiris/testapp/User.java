@@ -101,6 +101,8 @@ public class User implements Serializable {
         companyOwner = key;
     }
 
+    public void removeAllShifts(){shifts = null;}
+
     public String getCompanyOwner() {
         return companyOwner;
     }

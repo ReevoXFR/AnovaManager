@@ -2,6 +2,7 @@ package com.example.osiris.testapp;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -44,6 +45,9 @@ public class CompanyO_Account extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String email2;
 
+    private Button createCompanyButton;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +59,7 @@ public class CompanyO_Account extends AppCompatActivity {
         email2 = getIntent().getStringExtra("EMAIL");
 
 
+        createCompanyButton = (Button)findViewById(R.id.createCompanyButton);
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
 
         listView.setAdapter(arrayAdapter);
@@ -184,8 +189,12 @@ public class CompanyO_Account extends AppCompatActivity {
 
         if (companyName == null) {
             hasNoComp.setText("You have no company");
+            createCompanyButton.setEnabled(true);
+            createCompanyButton.setBackgroundColor(Color.parseColor("#000080"));
         } else {
            hasNoComp.setText("You have the company: " + companyName);
+           createCompanyButton.setEnabled(false);
+           createCompanyButton.setBackgroundColor(Color.GRAY);
         }
     }
 
