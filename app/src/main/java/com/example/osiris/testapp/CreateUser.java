@@ -57,7 +57,7 @@ public class CreateUser extends AppCompatActivity {
 
                         mAuth.getCurrentUser().sendEmailVerification(); //send email verification
                         if (!task.isSuccessful()){
-                            Toast.makeText(CreateUser.this, "Please check yout email!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateUser.this, "Please check your email!", Toast.LENGTH_SHORT).show();
                             return; // if creating the User fails, stop the method (eventually add a toast here please)
                         }
 
