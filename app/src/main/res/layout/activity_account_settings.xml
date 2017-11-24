@@ -9,14 +9,12 @@
 
     <TextView
         android:id="@+id/nametv"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="140dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Change name:"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.014"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,23 +34,27 @@
         app:layout_constraintTop_toBottomOf="@+id/nametv" />
 
     <Button
+        style="@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/changeNameButton"
-        android:layout_width="100dp"
-        android:layout_height="55dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:onClick="changeName"
         android:text="Change name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/changeName" />
+        app:layout_constraintTop_toBottomOf="@+id/changeName" />
 
     <TextView
         android:id="@+id/emailtv"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="140dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Change email:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/changeNameButton" />
 
@@ -60,33 +62,37 @@
         android:id="@+id/changeEmail"
         android:layout_width="200dp"
         android:layout_height="40dp"
-        android:layout_marginStart="92dp"
         android:layout_marginTop="4dp"
         android:backgroundTint="@color/white"
         android:hint="Enter new email"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textColorHint="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailtv" />
 
     <Button
         android:id="@+id/save"
-        android:layout_width="100dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="140dp"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:onClick="changeEmail"
         android:text="Change Email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/changeEmail" />
 
     <TextView
         android:id="@+id/passwordtv"
-        android:layout_width="135dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginTop="8dp"
         android:text="Change password:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/save" />
 
@@ -108,7 +114,7 @@
     <EditText
         android:id="@+id/passwordAccSettings"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:layout_marginTop="4dp"
         android:backgroundTint="@color/white"
         android:hint="Enter new password"
@@ -134,14 +140,16 @@
         app:layout_constraintTop_toBottomOf="@+id/passwordAccSettings" />
 
     <Button
-        android:layout_width="100dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="140dp"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:onClick="changePassword"
         android:text="Change password"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordAccSettings2" />
 
 
 </android.support.constraint.ConstraintLayout>

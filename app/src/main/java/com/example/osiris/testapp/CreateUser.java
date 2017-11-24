@@ -56,7 +56,10 @@ public class CreateUser extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         mAuth.getCurrentUser().sendEmailVerification(); //send email verification
-                        if (!task.isSuccessful()) return; // if creating the User fails, stop the method (eventually add a toast here please)
+                        if (!task.isSuccessful()){
+                            Toast.makeText(CreateUser.this, "Please check yout email!", Toast.LENGTH_SHORT).show();
+                            return; // if creating the User fails, stop the method (eventually add a toast here please)
+                        }
 
                         //add the user to firebase
                         User newUser = new User(nameTx.getText().toString(), emailTx.getText().toString());
