@@ -56,7 +56,6 @@ public class AccountSettings extends AppCompatActivity {
                 for (DataSnapshot child : children) {
                     //User user = new User(dataSnapshot.child("name").getValue(String.class), dataSnapshot.child("email").getValue(String.class));
                     User user = child.getValue(User.class);
-
                     if (user.getEmail().equals(email)) {
                         currentUser = user;
                         id = child.getKey();
@@ -71,7 +70,7 @@ public class AccountSettings extends AppCompatActivity {
         });
     }
 
-    public void changeName(View view) {     //TO BE COMPLETED
+    public void changeName(View view) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
         User user = currentUser;

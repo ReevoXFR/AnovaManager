@@ -42,6 +42,7 @@ public class CompanyO_Account extends AppCompatActivity {
     private TextView hasNoComp;
     //private TextView tv3;
     private FirebaseAuth mAuth;
+    private String email2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class CompanyO_Account extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.ListViewCompany);
         list = new ArrayList<String>();
-
+        email2 = getIntent().getStringExtra("EMAIL");
 
 
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
@@ -79,7 +80,7 @@ public class CompanyO_Account extends AppCompatActivity {
 
             }
         });
-        final String email = getIntent().getStringExtra("EMAIL");
+
 
         //   final ListView listView = (ListView) findViewById(R.id.listCont);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -90,16 +91,13 @@ public class CompanyO_Account extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-
-
                 for (DataSnapshot child : children) {
-
                     User user = child.getValue(User.class);
-
-                    if (user.getEmail().equals(email)) {
+                    if (user.getEmail().equals(email2)) {
                         currentUser = user;
                         checkForEmployees();
                         checkIfHasCompany();
+                        Log.d("AAAAAAAAAAA", user.getEmail());
                     }
                 }
             }
@@ -131,6 +129,7 @@ public class CompanyO_Account extends AppCompatActivity {
 
     public void accSettings(View view) {
         Intent intent = new Intent(this, AccountSettings.class);
+        intent.putExtra("EMAIL", email2);
         startActivity(intent);
     }
 
