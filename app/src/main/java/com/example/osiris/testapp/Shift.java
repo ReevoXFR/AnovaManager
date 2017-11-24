@@ -14,20 +14,12 @@ import java.util.Timer;
  */
 
 public class Shift implements Serializable {
-    // public GregorianCalendar startHour;
-    // public GregorianCalendar EndHour;
     public int startHour, endHour, startMin, endMin, sdd, smm, syy, edd, emm, eyy;
     public String userKey, companyName;
 
 
     public Shift() {
-        //startHour = new GregorianCalendar();
-        //EndHour = new GregorianCalendar();
     }
-
-//    public Shift(int day, int month, int year, int hour, int minute) {
-//        startHour.set(year, month, day, hour, minute);
-//    }
 
     public void setStartDateAndHour(int year, int month, int day, int hour, int minute) {
         sdd = day;
@@ -60,14 +52,51 @@ public class Shift implements Serializable {
         return s;
     }
 
-//    @Exclude
-//    public GregorianCalendar getStartHour() {
-//        return startHour;
-//    }
-//
-//    @Exclude
-//    public GregorianCalendar getEndHour() {
-//        return EndHour;
-//    }
+    public int getStartHour() {
+        return startHour;
+    }
 
+    public int getEndHour() {
+        return endHour;
+    }
+
+    public int getStartMin() {
+        return startMin;
+    }
+
+    public int getEndMin() {
+        return endMin;
+    }
+
+    public int getSmm() {
+        return smm;
+    }
+
+    public int getSyy() {
+        return syy;
+    }
+
+    public int getEdd() {
+        return edd;
+    }
+
+    public int getEmm() {
+        return emm;
+    }
+
+    public int getEyy() {
+        return eyy;
+    }
+
+    public String getUserKey() {
+        return userKey;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public int getSdd() {
+        return sdd;
+    }
 }

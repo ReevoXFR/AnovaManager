@@ -1,5 +1,6 @@
 package com.example.osiris.testapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -27,9 +28,10 @@ import java.util.List;
 
 public class checkEmployee extends AppCompatActivity {
     private ListView listView;
-    private ArrayList<String> shifts;
+    private ArrayList<String> shifts, keys;
+    private ArrayList<Shift> realShifts;
     private ArrayAdapter<String> arrayAdapter;
-    private String employeeKey;
+    private String employeeKey, key, id;
 
 
     @Override
@@ -43,6 +45,8 @@ public class checkEmployee extends AppCompatActivity {
         final String id = getIntent().getStringExtra("companyKey");
 
         shifts = new ArrayList<>();
+        keys = new ArrayList<>();
+        realShifts = new ArrayList<>();
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, shifts);
         listView.setAdapter(arrayAdapter);
 
@@ -50,8 +54,8 @@ public class checkEmployee extends AppCompatActivity {
     }
 
     public void checkForEmployees() {
-        final String key = getIntent().getStringExtra("KEY");
-        final String id = getIntent().getStringExtra("companyKey");
+        key = getIntent().getStringExtra("KEY");
+        id = getIntent().getStringExtra("companyKey");
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference().child("Users").child(key).child(id).child("Employees");
 
@@ -69,7 +73,9 @@ public class checkEmployee extends AppCompatActivity {
                             Iterable<DataSnapshot> children = dataSnapshot.getChildren();
                             for (DataSnapshot child : children) {
                                 Shift shift = child.getValue(Shift.class);
+                                keys.add(child.getKey());
                                 shifts.add(shift.toString());
+                                realShifts.add(shift);
                                 arrayAdapter.notifyDataSetChanged();
                             }
                         }
@@ -107,9 +113,15 @@ public class checkEmployee extends AppCompatActivity {
             public void onItemClick(AdapterView parent, View v, int position, long id){
                // Toast.makeText(checkEmployee.this, String.valueOf(position), Toast.LENGTH_LONG).show();
 
+                Shift shift = realShifts.get(position);
 
-
-
+                Intent intent = new Intent(checkEmployee.this, ShiftSettings.class);
+                intent.putExtra("SHIFT", shift);
+                intent.putExtra("KEY", keys.get(position));
+                intent.putExtra("KEY2", key);
+                intent.putExtra("ID", id);
+                intent.putExtra("EMPLOYEEKEY", employeeKey);
+                startActivity(intent);
             }
         });
 

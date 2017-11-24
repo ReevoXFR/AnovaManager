@@ -103,7 +103,6 @@ public class CompanyO_Account extends AppCompatActivity {
                         arrayAdapter.clear();
                         checkForEmployees();
                         checkIfHasCompany();
-                        Log.d("AAAAAAAAAAA", user.getEmail());
                     }
                 }
             }

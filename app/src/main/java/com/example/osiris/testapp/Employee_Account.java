@@ -177,8 +177,8 @@ public class Employee_Account extends AppCompatActivity {
             return;
         }
 
-                shift.setStartDateAndHour(dd, mm, yy, startH, startM);
-            shift.setEndDateAndHour(dd2, mm2, yy2, endH, endM);
+            shift.setStartDateAndHour(yy, mm, dd, startH, startM);
+            shift.setEndDateAndHour(yy2, mm2, dd2, endH, endM);
 
 
             shift.setUserKey(currentUser.getKey());
