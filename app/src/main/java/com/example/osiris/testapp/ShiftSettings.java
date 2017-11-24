@@ -106,10 +106,10 @@ public class ShiftSettings extends AppCompatActivity {
         }
 
 
-        shift.setStartDateAndHour(yy, mm, dd, startH, startM);
-        shift.setEndDateAndHour(yy2, mm2, dd2, endH, endM);
-        shift.setUserKey(employeeKey);
-//        currentUser.addShift(shift);         STILL NEED TO CHANGE THE SHIFTS IN "Shifts" AND "User"-Shifts
+//        shift.setStartDateAndHour(yy, mm, dd, startH, startM);
+//        shift.setEndDateAndHour(yy2, mm2, dd2, endH, endM);
+//        shift.setUserKey(employeeKey);
+//        currentUser.addShift(shift);         //STILL NEED TO CHANGE THE SHIFTS IN "Shifts" AND "User"-Shifts
 //        DatabaseReference myRef2 = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getKey());
 //        myRef2.setValue(currentUser);
 //        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Shifts");
@@ -118,58 +118,82 @@ public class ShiftSettings extends AppCompatActivity {
 
 
 
-//        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference().child("Users").child(key).child(id).child("Employees");       // TO BE IMPLEMENTED(Change shift in company-shifts)
-//
-//
-//        myRef.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//                User user = dataSnapshot.getValue(User.class);
-//                if (user.getEmail().equals(getIntent().getStringExtra("EMAIL"))) {
-//                    employeeKey = user.getKey();
-//                    final DatabaseReference myRef2 = database.getReference().child("Users").child(ownerKey).child(id).child("Employees").child(employeeKey).child("Shifts");
-//                    myRef2.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(DataSnapshot dataSnapshot) {
-//                            Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-//                            for (DataSnapshot child : children) {
-//                                Shift shift = child.getValue(Shift.class);
-//                                if(key.equals(child.getKey())) {
-//                                    myRef2.child("Users").child(ownerKey).child(id).child("Employees").child(employeeKey).child("Shifts").child(key).setValue(shift);
-//                                }
-//                            }
-//                        }
-//                        @Override
-//                        public void onCancelled(DatabaseError databaseError) {
-//
-//                        }
-//
-//                    });
-//                }
-//            }
-//
-//            @Override
-//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(DataSnapshot dataSnapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference().child("Users").child(key).child(id).child("Employees");       // TO BE IMPLEMENTED(Change shift in company-shifts)
 
 
+        myRef.addChildEventListener(new ChildEventListener() {                   //ALMOST DONE
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                User user = dataSnapshot.getValue(User.class);
+                if (user.getEmail().equals(getIntent().getStringExtra("EMAIL"))) {
+                    employeeKey = user.getKey();
+                    final DatabaseReference myRef2 = database.getReference().child("Users").child(ownerKey).child(id).child("Employees").child(employeeKey).child("Shifts");
+                    myRef2.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                            for (DataSnapshot child : children) {
+                                Shift shift = child.getValue(Shift.class);
+                                if(key.equals(child.getKey())) {
+                                    myRef2.child("Users").child("Users").child(ownerKey).child(id).child("Employees").child(employeeKey).child("Shifts").child(key).setValue(shift);
+                                }
+                            }
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+
+                    });
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+    public void deleteShift(View view) {
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();                   //Should also remove shifts from other places in db; TIP:shifts in company dont have the same key as thos in "Shifts"
+        final DatabaseReference myRef = database.getReference().child("Users").child(ownerKey).child(id).child("Employees").child(employeeKey).child("Shifts");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                for (DataSnapshot child : children) {
+                    //User user = new User(dataSnapshot.child("name").getValue(String.class), dataSnapshot.child("email").getValue(String.class));
+                   // Shift shift = child.getValue(Shift.class);
+                    if (child.getKey().equals(key)) {
+                        myRef.child(key).removeValue();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

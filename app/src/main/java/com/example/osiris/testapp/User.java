@@ -107,4 +107,9 @@ public class User implements Serializable {
         return companyOwner;
     }
 
+    public void fire() {
+        partOf=null;
+        companyOwner=null;
+    }
+
 }

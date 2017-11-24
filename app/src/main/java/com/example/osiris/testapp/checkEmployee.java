@@ -110,7 +110,7 @@ public class checkEmployee extends AppCompatActivity {
         });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView parent, View v, int position, long id){
+            public void onItemClick(AdapterView parent, View v, int position, long d){
                // Toast.makeText(checkEmployee.this, String.valueOf(position), Toast.LENGTH_LONG).show();
 
                 Shift shift = realShifts.get(position);
@@ -152,34 +152,49 @@ public class checkEmployee extends AppCompatActivity {
 
     public void removeEmployee(View view) {
 
-        Toast.makeText(checkEmployee.this, "Not implemented yet", Toast.LENGTH_LONG).show();
 
-//        final String key = getIntent().getStringExtra("KEY");
-//        final String id = getIntent().getStringExtra("companyKey");
-//
-//        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        final DatabaseReference myRef = database.getReference().child("Users");
-//        final String email = getIntent().getStringExtra("EMAIL");
-//
-//        myRef.child("Users").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-//                for (DataSnapshot child : children) {
-//                    User user = child.getValue(User.class);
-//                    if (user.getEmail().equals(email)) {
-//                        Log.d("AAAAAAAAAAA", user.getEmail());
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//
 
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = database.getReference().child("Users").child(key).child(id).child("Employees");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                for (DataSnapshot child : children) {
+                    if (child.getKey().equals(employeeKey)) {   //SHOULD ALSO REMOVE partof attribute in "Users"
+                        myRef.child(employeeKey).removeValue();
+
+//                        final DatabaseReference myRef2 = database.getReference().child("Users");       THIS SHOULD REMOVE partof and companyowner BUT COMPLETELY DELETS THE USER FROM THE DB
+//                        myRef2.addValueEventListener(new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(DataSnapshot dataSnapshot2) {
+//                                Iterable<DataSnapshot> children = dataSnapshot2.getChildren();
+//                                for (DataSnapshot child : children) {
+//                                    if (child.getKey().equals(employeeKey)) {
+//                                        User user = dataSnapshot2.getValue(User.class);
+//                                        user.fire();
+//                                        myRef2.child(employeeKey).setValue(user);
+//                                    }
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(DatabaseError databaseError) {
+//
+//                            }
+//                        });
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        Toast.makeText(checkEmployee.this, "Employee removed", Toast.LENGTH_LONG).show();
     }
 
 
