@@ -55,7 +55,8 @@ public class SeeShifts2 extends AppCompatActivity {
 
                     //User user = new User(dataSnapshot.child("name").getValue(String.class), dataSnapshot.child("email").getValue(String.class));
                     Shift shift = child.getValue(Shift.class);
-                    list.add(shift.toString());
+                    //list.add(shift.toString());
+                    arrayAdapter.insert(shift.toString(), 0);
                     arrayAdapter.notifyDataSetChanged();
                 }
             }
